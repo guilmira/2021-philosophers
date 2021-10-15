@@ -6,11 +6,69 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 10:01:42 by guilmira          #+#    #+#             */
-/*   Updated: 2021/10/13 10:04:36 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/10/13 17:35:55 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+/** PURPOSE : returns 1 if space of variation. */
+int	ft_isspaces(int c)
+{
+	return (c == ' ' || c == '\t' || c == '\n' || \
+	c == '\r' || c == '\f' || c == '\v');
+}
+
+/** PURPOSE : returns 1 if digit. */
+t_bool	ft_isdigit(int c)
+{
+	return (c >= '0' && c <= '9');
+}
+
+/** PURPOSE : outputs lenght of the string.
+ * 1. Advances string while increasing counter. */
+size_t	ft_strlen(const char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
+
+/** PURPOSE : converts string into integer equivalent.
+ * 1. Skip spaces, tabs and similar.
+ * 2. Check sign.
+ * 3. Take the string digit and add it to global number (multiplied by 10); */
+int	ft_atoi(const char *str)
+{
+	unsigned int	n;
+	unsigned int	i;
+	int				sign;
+
+	sign = 1;
+	i = 0;
+	n = 0;
+	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n' || \
+	str[i] == '\r' || str[i] == '\f' || str[i] == '\v')
+		i++;
+	if (str[i] == '+' || str[i] == '-')
+	{
+		if (str[i++] == '-')
+			sign = -1;
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		n = (str[i] - '0') + n * 10;
+		if (n > 2147483647 && sign == 1)
+			return (-1);
+		else if (n > 2147483648 && sign == -1)
+			return (0);
+		i++;
+	}
+	return (((int) n * sign));
+}
 
 /** PURPOSE : fills reference with zeros.
  * 1. Uses memset with '0' input over 'n' bytes
