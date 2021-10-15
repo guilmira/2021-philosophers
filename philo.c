@@ -1,63 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo1.c                                           :+:      :+:    :+:   */
+/*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 09:48:25 by guilmira          #+#    #+#             */
-/*   Updated: 2021/10/15 15:53:04 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/10/15 16:15:13 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+/** PURPOSE : Lock and unlock resource access. */
 pthread_mutex_t	mutex = PTHREAD_MUTEX_INITIALIZER;
-
-void	full_shutdown(t_time *arg)
-{
-	if (arg)
-		free (arg);
-	printf("%s", EX);
-}
-
-
-/* void	init_struct(int argc, t_times *arg)
-{
-
-} */
-
-/** PURPOSE : Generates struct argument.
- * 1. Allocates memory. Notice that function parser already
- * has checked that argument are either total 5 or 6.
- * 2. Reads value of arguments.*/
-t_time	*reader(int argc, char *argv[])
-{
-	t_time	*arg;
-
-	arg = NULL;
-	if (argc == OPT_1)
-		arg = ft_calloc(4, sizeof(int));
-	else if (argc == OPT_2)
-		arg = ft_calloc(5, sizeof(int));
-	if (!arg)
-		return (NULL);
-	arg->total_philos = ft_atoi(argv[1]);
-	arg->time_die = ft_atoi(argv[2]);
-	arg->time_eat = ft_atoi(argv[3]);
-	arg->time_sleep = ft_atoi(argv[4]);
-	arg->fifht_argument = 0;
-	arg->nbr_eat = 0;
-	if (argc == OPT_2)
-	{
-		arg->fifht_argument++;
-		arg->nbr_eat = ft_atoi(argv[5]);
-	}
-	return (arg);
-}
-
 t_bool knife = 0;
 
+/** PURPOSE : Execute thread (philosopher) routine. */
 void	*routine(void *arg)
 {
 	t_philo	*philo;
@@ -117,8 +76,10 @@ int	create_philos(t_time *arg)
 	return (0);
 }
 
-/** PURPOSE : .
- * 1. . */
+/** PURPOSE : Model and simulation of a philosophers table.
+ * 1. Parser argument. Must be 4 or 5 clean natural numbers.
+ * 2. Read arguments into struct.
+ * 3. Execute philosophers routine. */
 int main(int argc, char *argv[])
 {
 	t_time	*arg;

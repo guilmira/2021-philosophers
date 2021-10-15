@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 09:48:40 by guilmira          #+#    #+#             */
-/*   Updated: 2021/10/15 15:54:28 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/10/15 16:16:10 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <pthread.h>
 # include <string.h>
 
+/* PROGRAM OPTIONS */
 # define OPT_1	5
 # define OPT_2	6
 
@@ -84,5 +85,10 @@ size_t	ft_strlen(const char *s);
 void	*ft_calloc(size_t count, size_t size);
 t_bool	ft_isdigit(int c);
 int	ft_atoi(const char *str);
+/* MEMORY MANAGEMENT */
+void	full_shutdown(t_time *arg);
+
+/* ARGUMENT READ */
+t_time	*reader(int argc, char *argv[]);
 
 #endif
