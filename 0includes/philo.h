@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 09:48:40 by guilmira          #+#    #+#             */
-/*   Updated: 2021/10/15 16:16:10 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/10/15 18:42:06 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,12 @@
 # include <pthread.h>
 # include <string.h>
 
+# include <sys/time.h>
+
 /* PROGRAM OPTIONS */
 # define OPT_1	5
 # define OPT_2	6
-
+# define CONVER	1000000
 /* ERROR MESSAGES */
 # define EX		"Error.\n"
 
@@ -34,8 +36,8 @@
 # define WHITE	"\033[0;37m"//thinking
 # define NONE	"\033[0m"
 /* MESSAGES */
-# define MS		0
-# define PH		philo->index
+# define MS		ms
+# define PH		arg->array[i]->index
 # define KNIFE	"(%i) Philo %i has taken a fork   🗡\n", MS, PH
 # define EAT	YELLOW"(%i) Philo %i is eating\n"NONE, MS, PH
 # define SLEEP	BLUE"(%i) Philo %i is sleeping\n"NONE, MS, PH
@@ -58,17 +60,6 @@ typedef struct s_vector
 	int	y;
 }		t_vector;
 
-/** Struct that stores argument times. */
-typedef struct s_times
-{
-	int	total_philos;
-	int	time_die;
-	int	time_eat;
-	int	time_sleep;
-	int	fifht_argument;
-	int	nbr_eat;
-}		t_time;
-
 /** Struct that stores philospher variables. */
 typedef struct s_philo
 {
@@ -76,6 +67,20 @@ typedef struct s_philo
 	int			time_ate;
 	pthread_t	thread;
 }				t_philo;
+
+/** Struct that stores argument times. */
+typedef struct s_times
+{
+	int				total_philos;
+	int				time_die;
+	int				time_eat;
+	int				time_sleep;
+	int				nbr_eat;
+	struct timeval	init_time;
+	t_philo			**array;
+}		t_time;
+
+
 
 /* PARSER AND ARGUMENTS */
 int	parser(int argc, char *argv[]);

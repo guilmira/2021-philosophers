@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 10:01:42 by guilmira          #+#    #+#             */
-/*   Updated: 2021/10/13 17:35:55 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/10/15 17:22:02 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static void	ft_bzero(void *s, size_t n)
 /** PURPOSE : allocates memory, then fills it with 0.
  * 1. Casts malloc to return an UNSIGNED CHAR pointer.
  * 2. Uses ft_bzero to fill with zero.
- * Examples: allocate space for array if ints (grades from 0 to 10 BOTH included)
+ * Examples: allocate space for array of ints (grades from 0 to 10 BOTH included)
  * 		int *array;
  * 		array = ft_calloc(11, size of(int)); //usually int has size 4
  * 		free (array);
