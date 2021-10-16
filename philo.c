@@ -6,14 +6,13 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 09:48:25 by guilmira          #+#    #+#             */
-/*   Updated: 2021/10/16 11:36:35 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/10/16 15:54:35 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-/** PURPOSE : Lock and unlock resource access. */
-pthread_mutex_t	g_mutex = PTHREAD_MUTEX_INITIALIZER;
+
 
 /** PURPOSE : Execute thread (philosopher) routine. */
 void	*routine(void *argu)
@@ -23,19 +22,32 @@ void	*routine(void *argu)
 	t_time			*arg;
 	struct timeval	time;
 
+	t_philo	*philo;
+	static int n;
+
 	arg = (t_time *)argu;
+	philo = arg->array[n];
+	philo->index = n + 1;
+	assign_mutex2(arg, arg->knives, philo->index);
+	n++;
+
 	time = arg->init_time;
 	i = -1;
 	while (++i < 1)
 	{
-		pthread_mutex_lock(&g_mutex);
+		//MUTEX para los print
+		pthread_mutex_lock(&(philo->left));
+		ms = get_microseconds(time);
+		printf(KNIFE);
+		pthread_mutex_lock(&(philo->right));
 		ms = get_microseconds(time);
 		printf(KNIFE);
 		ms = get_microseconds(time);
 		printf(EAT);
 		ms = get_microseconds(time);
 		printf(SLEEP);
-		pthread_mutex_unlock(&g_mutex);
+		pthread_mutex_unlock(&(philo->right));
+		pthread_mutex_unlock(&(philo->left));
 		ms = get_microseconds(time);
 		printf(THINK);
 		usleep(1);
@@ -62,6 +74,8 @@ int	create_threads(t_time *arg)
 	return (0);
 }
 
+
+
 /** PURPOSE : Create philosophers.
  * 1. Allocate memory. Notice that there is an array of philos.
  * This requires, first allocate space for (number of philos) pre.
@@ -73,8 +87,12 @@ int	run_simulation(t_time *arg)
 	arg->array = ft_calloc(arg->total_philos, sizeof(t_philo *));
 	if (!arg->array)
 		return (1);
+	if (create_mutex(arg, arg->total_philos))
+		return (1);
 	if (create_philos(arg->array, arg->total_philos))
 		return (1);
+	/* if (assign_mutex(arg, arg->total_philos, arg->knives))
+		return (1); */
 	if (create_threads(arg))
 		return (1);
 	return (0);
@@ -84,6 +102,8 @@ int	run_simulation(t_time *arg)
 {
 	system("leaks philo");
 } */
+
+
 
 /** PURPOSE : Model and simulation of a philosophers table.
  * 1. Parser argument. Must be 4 or 5 clean natural numbers.

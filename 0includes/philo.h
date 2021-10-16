@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 09:48:40 by guilmira          #+#    #+#             */
-/*   Updated: 2021/10/16 11:39:29 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/10/16 15:46:10 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 # define NONE	"\033[0m"
 /* MESSAGES */
 # define MS		ms
-# define PH		arg->array[i]->index
+# define PH		arg->array[n - 1]->index
 # define KNIFE	"(%i) Philo %i has taken a fork   🗡\n", MS, PH
 # define EAT	YELLOW"(%i) Philo %i is eating\n"NONE, MS, PH
 # define SLEEP	BLUE"(%i) Philo %i is sleeping\n"NONE, MS, PH
@@ -63,9 +63,11 @@ typedef struct s_vector
 /** Struct that stores philospher variables. */
 typedef struct s_philo
 {
-	int			index;
-	int			time_ate;
-	pthread_t	thread;
+	int				index;
+	pthread_mutex_t	left;
+	pthread_mutex_t	right;
+	int				time_ate;
+	pthread_t		thread;
 }				t_philo;
 
 /** Struct that stores argument times. */
@@ -78,6 +80,7 @@ typedef struct s_times
 	int				nbr_eat;
 	struct timeval	init_time;
 	t_philo			**array;
+	pthread_mutex_t	*knives;
 }		t_time;
 
 /* PARSER AND ARGUMENTS */
@@ -87,10 +90,14 @@ t_time	*reader(int argc, char *argv[]);
 /* PHILOSPHERS MANAGEMENT */
 int		get_microseconds(struct timeval	init_time);
 int		create_philos(t_philo **array, int total_philos);
+int	create_mutex(t_time *arg, int total_philos);
+int		assign_mutex(t_time *arg, int total_philos, pthread_mutex_t	*knives);
+int	assign_mutex2(t_time *arg, pthread_mutex_t	*knives, int index);
 /* MEMORY MANAGEMENT */
 void	full_shutdown(t_time *arg);
 void	clean_memory(t_time *arg);
 void	free_array_philos(t_philo **array, int total_philos);
+void	mutex_destructor(pthread_mutex_t	*knives, int total_philos);
 /* TOOLKIT */
 int		ft_isspaces(int c);
 size_t	ft_strlen(const char *s);
