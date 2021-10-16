@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 09:48:40 by guilmira          #+#    #+#             */
-/*   Updated: 2021/10/15 18:42:06 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/10/16 11:39:29 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,20 +80,22 @@ typedef struct s_times
 	t_philo			**array;
 }		t_time;
 
-
-
 /* PARSER AND ARGUMENTS */
-int	parser(int argc, char *argv[]);
+int		parser(int argc, char *argv[]);
+/* ARGUMENT READ */
+t_time	*reader(int argc, char *argv[]);
+/* PHILOSPHERS MANAGEMENT */
+int		get_microseconds(struct timeval	init_time);
+int		create_philos(t_philo **array, int total_philos);
+/* MEMORY MANAGEMENT */
+void	full_shutdown(t_time *arg);
+void	clean_memory(t_time *arg);
+void	free_array_philos(t_philo **array, int total_philos);
 /* TOOLKIT */
-int	ft_isspaces(int c);
+int		ft_isspaces(int c);
 size_t	ft_strlen(const char *s);
 void	*ft_calloc(size_t count, size_t size);
 t_bool	ft_isdigit(int c);
-int	ft_atoi(const char *str);
-/* MEMORY MANAGEMENT */
-void	full_shutdown(t_time *arg);
-
-/* ARGUMENT READ */
-t_time	*reader(int argc, char *argv[]);
+int		ft_atoi(const char *str);
 
 #endif
