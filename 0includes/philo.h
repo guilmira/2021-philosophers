@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 09:48:40 by guilmira          #+#    #+#             */
-/*   Updated: 2021/10/16 15:46:10 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/10/17 11:51:32 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,12 @@
 # define NONE	"\033[0m"
 /* MESSAGES */
 # define MS		ms
-# define PH		arg->array[n - 1]->index
-# define KNIFE	"(%i) Philo %i has taken a fork   🗡\n", MS, PH
-# define EAT	YELLOW"(%i) Philo %i is eating\n"NONE, MS, PH
-# define SLEEP	BLUE"(%i) Philo %i is sleeping\n"NONE, MS, PH
-# define THINK	WHITE"(%i) Philo %i is thinking\n"NONE, MS, PH
+# define PH		philo->index
+# define KNIFE	"(%i) Philo %i has taken left %i fork   🗡\n", MS, PH, PH - 1
+# define KNIFER	"(%i) Philo %i has taken right %i fork   🗡\n", MS, PH, PH
+# define EAT	YELLOW"(%i) Philo %i is eating\n"NONE
+# define SLEEP	BLUE"(%i) Philo %i is sleeping\n"NONE
+# define THINK	WHITE"(%i) Philo %i is thinking\n"NONE
 # define DIED	RED"(%i) Philo %i died\n"NONE, MS, PH
 
 typedef int	t_bool;
@@ -90,9 +91,10 @@ t_time	*reader(int argc, char *argv[]);
 /* PHILOSPHERS MANAGEMENT */
 int		get_microseconds(struct timeval	init_time);
 int		create_philos(t_philo **array, int total_philos);
-int	create_mutex(t_time *arg, int total_philos);
+int		create_mutex(t_time *arg, int total_philos);
 int		assign_mutex(t_time *arg, int total_philos, pthread_mutex_t	*knives);
-int	assign_mutex2(t_time *arg, pthread_mutex_t	*knives, int index);
+/* PHILOSPHERS ROUTINE */
+int		create_threads(t_time *arg);
 /* MEMORY MANAGEMENT */
 void	full_shutdown(t_time *arg);
 void	clean_memory(t_time *arg);

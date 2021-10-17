@@ -6,7 +6,7 @@
 #    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/13 09:55:51 by guilmira          #+#    #+#              #
-#    Updated: 2021/10/16 15:42:43 by guilmira         ###   ########.fr        #
+#    Updated: 2021/10/17 10:56:05 by guilmira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ INCLUDES	= -I ./0includes
 INCLUDES_TH	= -pthread
 #--------------------------------------------------------------------------------------------------------------SOURCES
 SRCS		=	philo.c 0parser.c 1reader.c 2philo_management.c \
-				5managment.c 8philo_tools.c
+				3philo_routine.c 5managment.c 8philo_tools.c
 OBJS		= $(SRCS:.c=.o)
 #--------------------------------------------------------------------------------------------------------------RULES
 all: $(NAME)

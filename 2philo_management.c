@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 11:30:29 by guilmira          #+#    #+#             */
-/*   Updated: 2021/10/16 15:53:07 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/10/17 11:09:58 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	create_philos(t_philo **array, int total_philos)
 			return (1);
 		}
 		array[i]->index = i + 1;
+		usleep(80);
 	}
 	return (0);
 }
@@ -90,32 +91,15 @@ int	assign_mutex(t_time *arg, int total_philos, pthread_mutex_t	*knives)
 	t_philo	*philo;
 
 	i = -1;
-
 	while (++i < total_philos)
 	{
 		philo = arg->array[i];
 		philo->left = knives[philo->index - 1];
 		if (i == total_philos - 1)
-		{
 			philo->right = knives[0];
-		}
 		else
 			philo->right = knives[philo->index];
 	}
 	return (0);
 }
 
-int	assign_mutex2(t_time *arg, pthread_mutex_t	*knives, int index)
-{
-	t_philo	*philo;
-
-	philo = arg->array[index - 1];
-	philo->left = knives[philo->index - 1];
-	if (philo->index == arg->total_philos)
-	{
-		philo->right = knives[0];
-	}
-	else
-		philo->right = knives[philo->index];
-	return (0);
-}
