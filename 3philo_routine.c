@@ -6,35 +6,43 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 10:55:52 by guilmira          #+#    #+#             */
-/*   Updated: 2021/10/17 11:50:00 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/10/17 12:59:40 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-pthread_mutex_t g_mutex  = PTHREAD_MUTEX_INITIALIZER;
 
-void	action(char *str, int miliseconds, int number_philo)
+
+void	action(t_time *arg, char *str, int miliseconds, int number_philo)
 {
+	//pthread_mutex_lock(&(arg->mtx_print));
 	printf(str, miliseconds, number_philo);
+	//pthread_mutex_unlock(&(arg->mtx_print));
 }
 
 /** PURPOSE : Execute thread (philosopher) routine. */
 static void	*routine(void *argu)
 {
+
+	//BORRA PREGUNTA Y EMPIEZA DE NUEVO CON LA RUTINA
+	//dudas, como identificar a los filos e mejor manera cuando entrass a la
+	//rutina
+	//DUDA 2 los mutex lefy right... nesteados? o por separado
 	int				i;
 	int				ms;
 	t_time			*arg;
 	struct timeval	time;
-
-	int left;
-	int right;
 	arg = (t_time *)argu;
 	t_philo	*philo;
 	static int n;
 
 
-	pthread_mutex_lock(&g_mutex);
+
+	ms = 0;
+	time = arg->init_time;
+
+	pthread_mutex_lock(&(arg->mtx_enter)); //ponlos global que fucnonaba
 	i = -1;
 	while (++i < arg->total_philos)
 	{
@@ -42,48 +50,18 @@ static void	*routine(void *argu)
 		if (philo->index == (n + 1))
 			break;
 	}
-	printf("filosofo numero de array %i en hilo %i\n", philo->index -1, n );
+	ms = get_microseconds(time);
+	printf("(%i) filosofo numero %i en hilo %i\n", ms, philo->index, n );
 	n++;
-	pthread_mutex_unlock(&g_mutex);
+	pthread_mutex_unlock(&(arg->mtx_enter));
 
-
-
-	left = 0;
-	right = 0;
-	ms = 0;
-	time = arg->init_time;
 	i = -1;
 	while (++i < 2)
 	{
-		//MUTEX para los print
-		if (!left)
-		{
-			pthread_mutex_lock(&(philo->left));
-			left++;
-			ms = get_microseconds(time);
-			printf(KNIFE);
-			pthread_mutex_unlock(&(philo->left));
-		}
-		if (!right)
-		{
-			pthread_mutex_lock(&(philo->right));
-			right++;
-			ms = get_microseconds(time);
-			printf(KNIFER);
-			pthread_mutex_unlock(&(philo->right));
-		}
-		if (left & right)
-		{
-			left = 0;
-			right = 0;
-			ms = get_microseconds(time);
-			action(EAT, ms, PH);
-			ms = get_microseconds(time);
-			action(SLEEP, ms, PH);
-			ms = get_microseconds(time);
-			action(THINK, ms, PH);
-			usleep(1000);
-		}
+		//ve mutex a mutex viendo comportamientos. pocoa  poc y
+		//One filo at a time. pon funcioes de comer dormir, pensar
+		//con sus correspondientes tiempos
+
 	}
 	return (NULL);
 }

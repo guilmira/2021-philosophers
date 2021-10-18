@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 09:48:40 by guilmira          #+#    #+#             */
-/*   Updated: 2021/10/17 11:51:32 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/10/17 12:57:02 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ typedef struct s_vector
 typedef struct s_philo
 {
 	int				index;
+	int				left_index; //para borrar ambos
+	int				right_index;
 	pthread_mutex_t	left;
 	pthread_mutex_t	right;
 	int				time_ate;
