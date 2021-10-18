@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 09:48:40 by guilmira          #+#    #+#             */
-/*   Updated: 2021/10/18 13:54:07 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/10/18 15:39:25 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@
 /* MESSAGES */
 # define MS		ms
 # define PH		philo->index
-# define KNIFE	"(%i) Philo %i has taken left %i fork   🗡\n", MS, PH, PH - 1
-# define KNIFER	"(%i) Philo %i has taken right %i fork   🗡\n", MS, PH, PH
+# define KNIFE	"(%i) Philo %i has taken left fork   🗡\n"
+# define KNIFER	"(%i) Philo %i has taken right fork   🗡\n"
 # define EAT	YELLOW"(%i) Philo %i is eating\n"NONE
 # define SLEEP	BLUE"(%i) Philo %i is sleeping\n"NONE
 # define THINK	WHITE"(%i) Philo %i is thinking\n"NONE
@@ -78,6 +78,7 @@ typedef struct s_philo
 	int				index;
 	pthread_mutex_t	left;
 	pthread_mutex_t	right;
+	pthread_mutex_t	*knives;
 	pthread_mutex_t	print;
 	pthread_t		thread;
 	t_time			*times;
@@ -105,6 +106,12 @@ void	clean_argument(t_time *arg);
 void	free_array_philos(t_philo **array, int total_philos);
 void	mutex_destructor(pthread_mutex_t	*knives, int total_philos);
 void	clean_simulation(t_philo **array, pthread_mutex_t *knives, int total_philos);
+/* ACTIONS */
+void	knife_l(t_philo *philo);
+void	knife_r(t_philo *philo);
+void	eat(t_philo *philo);
+void	ft_sleep(t_philo *philo);
+
 /* TOOLKIT */
 int		ft_isspaces(int c);
 size_t	ft_strlen(const char *s);

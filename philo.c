@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 09:48:25 by guilmira          #+#    #+#             */
-/*   Updated: 2021/10/18 13:58:05 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/10/18 15:39:18 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	run_simulation(t_time *arg)
 		return(1);
 	}
 	init_philos(array, arg);
-	link_philos_and_mutex(array, knives, arg->total_philos);
+	//link_philos_and_mutex(array, knives, arg->total_philos);
 	if (create_threads(array, arg->total_philos))
 	{
 		clean_simulation(array, knives, arg->total_philos);

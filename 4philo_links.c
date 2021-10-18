@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 13:29:55 by guilmira          #+#    #+#             */
-/*   Updated: 2021/10/18 13:55:18 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/10/18 15:41:16 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,5 @@ pthread_mutex_t *knives, int total_philos)
 		else
 			array[i]->right = knives[0];
 	}
+
 }
