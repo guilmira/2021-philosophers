@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 10:55:52 by guilmira          #+#    #+#             */
-/*   Updated: 2021/10/18 12:52:00 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/10/18 14:12:29 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,34 @@
 	//rutina
 	//DUDA 2 los mutex lefy right... nesteados? o por separado
 
-/* void	action(t_time *arg, char *str, int miliseconds, int number_philo)
-{
-	//pthread_mutex_lock(&(arg->mtx_print));
-	printf(str, miliseconds, number_philo);
-	//pthread_mutex_unlock(&(arg->mtx_print));
-} */
-
 int g_count = 10;
+
+static void	action(t_philo *philo, char *str,\
+struct timeval time, int index)
+{
+	int	miliseconds;
+	int	philo_index_print;
+
+	philo_index_print = index++;
+	pthread_mutex_lock(&(philo->print));
+	miliseconds = get_microseconds(time);
+	printf(str, miliseconds, philo_index_print);
+	miliseconds = get_microseconds(time);
+	usleep(300000);
+	pthread_mutex_unlock(&(philo->print));
+}
+
+
 
 /** PURPOSE : Execute thread (philosopher) routine. */
 static void	*routine(void *array_element)
 {
 	int				i;
-	int				ms;
 	t_philo			*philo;
 	struct timeval	time;
-
+	//prohibido meter miliseconds aqui y duplicar prints. solo un
+	//print en action. UN UNICO PRINT.
 	philo = (t_philo *)array_element;
-	ms = 0;
 	time = philo->times->init_time;
 
 
@@ -48,8 +57,7 @@ static void	*routine(void *array_element)
 			g_count++;
 		else
 			g_count--;
-		ms = get_microseconds(time);
-		printf("(%i) philo_index: %i y count: %i\n", ms, philo->index, g_count);
+		action(philo, EAT, time, philo->index);
 		pthread_mutex_unlock(&(philo->right));
 		pthread_mutex_unlock(&(philo->left));
 	}

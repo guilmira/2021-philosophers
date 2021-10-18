@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 09:48:25 by guilmira          #+#    #+#             */
-/*   Updated: 2021/10/18 13:33:21 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/10/18 13:58:05 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,24 +29,22 @@ int	run_simulation(t_time *arg)
 	if (create_philos(array, arg->total_philos))
 		return (1);
 	knives = create_mutex(arg->total_philos);
-	if (!knives) //no clenees aqui argument. te cargas stack
+	if (!knives)
 	{
-		free(knives); //hay que poner el destructor de mutex
-		free_array_philos(array, arg->total_philos);
-		free(array);
+		clean_simulation(array, knives, arg->total_philos);
 		return(1);
 	}
 	init_philos(array, arg);
-	link_philos_and_mutex(array, knives, arg->total_philos); //aqui podria haber fallo si no apss mutex x ref.
-	if (create_threads(array, arg->total_philos)) //aqui flataria unos clean memory debajo
+	link_philos_and_mutex(array, knives, arg->total_philos);
+	if (create_threads(array, arg->total_philos))
+	{
+		clean_simulation(array, knives, arg->total_philos);
 		return (1);
-	clean_array_and_knives(array, knives, arg->total_philos);
+	}
+	pthread_mutex_destroy(&(array[0]->print));
+	clean_simulation(array, knives, arg->total_philos);
 	return (0);
 }
-
-
-
-
 
 /** PURPOSE : Model and simulation of a philosophers table.
  * 1. Parser argument. Must be 4 or 5 clean natural numbers.
@@ -71,12 +69,10 @@ int	main(int argc, char *argv[])
 	}
 	if (run_simulation(arg))
 	{
-
 		ft_shutdown(arg); //lleva exit ahora mismo.
-		//no ahce falta un cleane rdebajo xk se libera todo en run simultion
+		//no ahce falta un cleane xk se libera en run simultion
 		return (1);
 	}
-	//system("leaks philo");
 	clean_argument(arg);
 	return (0);//exit(0);
 }

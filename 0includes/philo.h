@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 09:48:40 by guilmira          #+#    #+#             */
-/*   Updated: 2021/10/18 13:31:48 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/10/18 13:54:07 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ typedef struct s_philo
 	int				index;
 	pthread_mutex_t	left;
 	pthread_mutex_t	right;
+	pthread_mutex_t	print;
 	pthread_t		thread;
 	t_time			*times;
 }				t_philo;
@@ -103,7 +104,7 @@ void	ft_shutdown(t_time *arg);
 void	clean_argument(t_time *arg);
 void	free_array_philos(t_philo **array, int total_philos);
 void	mutex_destructor(pthread_mutex_t	*knives, int total_philos);
-void	clean_array_and_knives(t_philo **array, pthread_mutex_t *knives, int total_philos);
+void	clean_simulation(t_philo **array, pthread_mutex_t *knives, int total_philos);
 /* TOOLKIT */
 int		ft_isspaces(int c);
 size_t	ft_strlen(const char *s);
