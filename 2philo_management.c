@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 11:30:29 by guilmira          #+#    #+#             */
-/*   Updated: 2021/10/18 12:16:15 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/10/18 13:17:55 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,25 +55,24 @@ int	create_philos(t_philo **array, int total_philos)
 /** PURPOSE : Create array of mutex.
  * The purpose of the mutex is:
  * Lock and unlock resource access. */
-int	create_mutex(pthread_mutex_t **knives, int total_philos)
+pthread_mutex_t	*create_mutex(int total_philos)
 {
 	int				i;
 	pthread_mutex_t	*mutex_array;
 
-	mutex_array = *knives;
 	mutex_array = ft_calloc(total_philos, sizeof(pthread_mutex_t));
 	if (!mutex_array)
-		return (1);
+		return (NULL);
 	i = -1;
 	while (++i < total_philos)
 	{
-		if (pthread_mutex_init(&mutex_array[i], NULL)) //podris poner &arg->knives[i]
+		if (pthread_mutex_init(&mutex_array[i], NULL))
 		{
-			mutex_destructor(mutex_array, total_philos); //ojo con pasar mutex_array, igual hay que apsar a refe.
-			return (1);
+			mutex_destructor(mutex_array, total_philos);
+			return (NULL);
 		}
 	}
-	return (0);
+	return (mutex_array);
 }
 
 

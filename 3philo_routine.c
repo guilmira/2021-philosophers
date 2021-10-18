@@ -6,13 +6,16 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 10:55:52 by guilmira          #+#    #+#             */
-/*   Updated: 2021/10/18 12:49:35 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/10/18 12:52:00 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-
+//BORRA PREGUNTA Y EMPIEZA DE NUEVO CON LA RUTINA
+	//dudas, como identificar a los filos e mejor manera cuando entrass a la
+	//rutina
+	//DUDA 2 los mutex lefy right... nesteados? o por separado
 
 /* void	action(t_time *arg, char *str, int miliseconds, int number_philo)
 {
@@ -26,24 +29,19 @@ int g_count = 10;
 /** PURPOSE : Execute thread (philosopher) routine. */
 static void	*routine(void *array_element)
 {
-
-	//BORRA PREGUNTA Y EMPIEZA DE NUEVO CON LA RUTINA
-	//dudas, como identificar a los filos e mejor manera cuando entrass a la
-	//rutina
-	//DUDA 2 los mutex lefy right... nesteados? o por separado
-	int		i;
-	t_philo	*philo;
+	int				i;
+	int				ms;
+	t_philo			*philo;
 	struct timeval	time;
+
 	philo = (t_philo *)array_element;
-	int ms;
 	ms = 0;
 	time = philo->times->init_time;
-	//ms = get_microseconds(time);
+
 
 	i = -1;
 	while (++i < 2)
 	{
-		//mutex;
 		pthread_mutex_lock(&(philo->left));
 		pthread_mutex_lock(&(philo->right));
 		if (philo->index == 0)
@@ -54,11 +52,6 @@ static void	*routine(void *array_element)
 		printf("(%i) philo_index: %i y count: %i\n", ms, philo->index, g_count);
 		pthread_mutex_unlock(&(philo->right));
 		pthread_mutex_unlock(&(philo->left));
-
-		//ve mutex a mutex viendo comportamientos. pocoa  poc y
-		//One filo at a time. pon funcioes de comer dormir, pensar
-		//con sus correspondientes tiempos
-
 	}
 	return (NULL);
 }

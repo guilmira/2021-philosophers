@@ -6,40 +6,11 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 09:48:25 by guilmira          #+#    #+#             */
-/*   Updated: 2021/10/18 12:32:59 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/10/18 13:33:21 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-
-int	init_philos(t_philo **array, t_time *arg)
-{
-	int	i;
-
-	i = -1;
-	while (++i < arg->total_philos)
-	{
-		array[i]->times = arg;
-	}
-	return (0);
-}
-
-void	link_philos_and_mutex(t_philo **array, \
-pthread_mutex_t *knives, int total_philos)
-{
-	int	i;
-
-	i = -1;
-	while (++i < total_philos)
-	{
-		array[i]->left = knives[i];
-		if (i != total_philos - 1)
-			array[i]->right = knives[i + 1];
-		else
-			array[i]->right = knives[0];
-	}
-}
 
 /** PURPOSE : Create philosophers.
  * 1. Allocate memory. Notice that there is an array of philos.
@@ -57,20 +28,23 @@ int	run_simulation(t_time *arg)
 		return (1);
 	if (create_philos(array, arg->total_philos))
 		return (1);
-	create_mutex(&knives, arg->total_philos);
+	knives = create_mutex(arg->total_philos);
+	if (!knives) //no clenees aqui argument. te cargas stack
+	{
+		free(knives); //hay que poner el destructor de mutex
+		free_array_philos(array, arg->total_philos);
+		free(array);
+		return(1);
+	}
 	init_philos(array, arg);
 	link_philos_and_mutex(array, knives, arg->total_philos); //aqui podria haber fallo si no apss mutex x ref.
-
-	if (create_threads(array, arg->total_philos))
+	if (create_threads(array, arg->total_philos)) //aqui flataria unos clean memory debajo
 		return (1);
-	//clean_array_and_knives(array, knives, arg->total_philos);
+	clean_array_and_knives(array, knives, arg->total_philos);
 	return (0);
 }
 
-/* void ft_leaks(void)
-{
-	system("leaks philo");
-} */
+
 
 
 
@@ -86,20 +60,23 @@ int	main(int argc, char *argv[])
 	arg = NULL;
 	if (parser(argc, argv))
 	{
-		//full_shutdown(arg); shutdown(arg)
+		ft_shutdown(arg);
 		return (1);
 	}
 	arg = reader(argc, argv);
 	if (!arg)
 	{
-		//full_shutdown(arg); shutdown(arg)
+		ft_shutdown(arg);
 		return (1);
 	}
 	if (run_simulation(arg))
 	{
-		//full_shutdown(arg);
+
+		ft_shutdown(arg); //lleva exit ahora mismo.
+		//no ahce falta un cleane rdebajo xk se libera todo en run simultion
 		return (1);
 	}
-	//clean_memory(arg);
+	//system("leaks philo");
+	clean_argument(arg);
 	return (0);//exit(0);
 }

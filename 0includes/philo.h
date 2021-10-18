@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 09:48:40 by guilmira          #+#    #+#             */
-/*   Updated: 2021/10/18 12:29:07 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/10/18 13:31:48 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,17 @@ t_time	*reader(int argc, char *argv[]);
 /* PHILOSPHERS MANAGEMENT */
 int		get_microseconds(struct timeval	init_time);
 int		create_philos(t_philo **array, int total_philos);
-int	create_mutex(pthread_mutex_t **knives, int total_philos);
+pthread_mutex_t	*create_mutex(int total_philos);
 int		assign_mutex(t_time *arg, int total_philos, pthread_mutex_t	*knives);
 /* PHILOSPHERS ROUTINE */
 int	create_threads(t_philo **array, int total_philos);
+/* PHILOSPHERS LINKER */
+void	link_philos_and_mutex(t_philo **array, \
+pthread_mutex_t *knives, int total_philos);
+int	init_philos(t_philo **array, t_time *arg);
+
 /* MEMORY MANAGEMENT */
-void	full_shutdown(t_time *arg);
+void	ft_shutdown(t_time *arg);
 void	clean_argument(t_time *arg);
 void	free_array_philos(t_philo **array, int total_philos);
 void	mutex_destructor(pthread_mutex_t	*knives, int total_philos);
@@ -105,5 +110,8 @@ size_t	ft_strlen(const char *s);
 void	*ft_calloc(size_t count, size_t size);
 t_bool	ft_isdigit(int c);
 int		ft_atoi(const char *str);
+
+
+void ft_leaks(void);
 
 #endif

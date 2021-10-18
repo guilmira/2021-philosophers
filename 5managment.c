@@ -6,11 +6,16 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:00:14 by guilmira          #+#    #+#             */
-/*   Updated: 2021/10/18 12:29:02 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/10/18 13:21:15 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void ft_leaks(void)
+{
+	system("leaks philo");
+}
 
 //EXIT no permitida, habra que quitarla.
 
@@ -39,8 +44,12 @@ void	mutex_destructor(pthread_mutex_t *knives, int total_philos)
 	if (!knives)
 		return ;
 	i = -1;
+
 	while (++i < total_philos)
+	{
+		printf("illegal instruction\n");
 		pthread_mutex_destroy(&(knives[i]));
+	}
 }
 
 /** PURPOSE : Fu */
@@ -55,9 +64,10 @@ void	clean_array_and_knives(t_philo **array, pthread_mutex_t *knives, int total_
 {
 	if (knives)
 	{
-		mutex_destructor(knives, total_philos);
+		//mutex_destructor(knives, total_philos);
 		free(knives);
 	}
+
 	if (array)
 	{
 		if (array[0])
@@ -75,11 +85,12 @@ void	clean_array_and_knives(t_philo **array, pthread_mutex_t *knives, int total_
 
 
 /** PURPOSE : shutdown program meanwhile freeing heap allocated memory.
- * 1. Clean memory for all structs if allocated.
+ * 1. Clean memory for argument.
  * 3. Print error message. */
-void	full_shutdown(t_time *arg)
+void	ft_shutdown(t_time *arg)
 {
-	clean_argument(arg);
+	if (arg)
+		clean_argument(arg);
 	printf("%s", EX);
 	exit(0);
 }
