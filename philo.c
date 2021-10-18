@@ -6,11 +6,40 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 09:48:25 by guilmira          #+#    #+#             */
-/*   Updated: 2021/10/17 12:45:00 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/10/18 12:32:59 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+
+int	init_philos(t_philo **array, t_time *arg)
+{
+	int	i;
+
+	i = -1;
+	while (++i < arg->total_philos)
+	{
+		array[i]->times = arg;
+	}
+	return (0);
+}
+
+void	link_philos_and_mutex(t_philo **array, \
+pthread_mutex_t *knives, int total_philos)
+{
+	int	i;
+
+	i = -1;
+	while (++i < total_philos)
+	{
+		array[i]->left = knives[i];
+		if (i != total_philos - 1)
+			array[i]->right = knives[i + 1];
+		else
+			array[i]->right = knives[0];
+	}
+}
 
 /** PURPOSE : Create philosophers.
  * 1. Allocate memory. Notice that there is an array of philos.
@@ -18,19 +47,23 @@
  * this is: |pointer| |pointer| |pointer| (for 3 philos). */
 int	run_simulation(t_time *arg)
 {
+	t_philo			**array;
+	pthread_mutex_t	*knives;
+
 	if (gettimeofday(&(arg->init_time), NULL))
 		return (1);
-	arg->array = ft_calloc(arg->total_philos, sizeof(t_philo *));
-	if (!arg->array)
+	array = ft_calloc(arg->total_philos, sizeof(t_philo *));
+	if (!array)
 		return (1);
-	if (create_mutex(arg, arg->total_philos))
+	if (create_philos(array, arg->total_philos))
 		return (1);
-	if (create_philos(arg->array, arg->total_philos))
+	create_mutex(&knives, arg->total_philos);
+	init_philos(array, arg);
+	link_philos_and_mutex(array, knives, arg->total_philos); //aqui podria haber fallo si no apss mutex x ref.
+
+	if (create_threads(array, arg->total_philos))
 		return (1);
-	if (assign_mutex(arg, arg->total_philos, arg->knives))
-		return (1);
-	if (create_threads(arg))
-		return (1);
+	//clean_array_and_knives(array, knives, arg->total_philos);
 	return (0);
 }
 
@@ -53,20 +86,20 @@ int	main(int argc, char *argv[])
 	arg = NULL;
 	if (parser(argc, argv))
 	{
-		full_shutdown(arg);
+		//full_shutdown(arg); shutdown(arg)
 		return (1);
 	}
 	arg = reader(argc, argv);
 	if (!arg)
 	{
-		full_shutdown(arg);
+		//full_shutdown(arg); shutdown(arg)
 		return (1);
 	}
 	if (run_simulation(arg))
 	{
-		full_shutdown(arg);
+		//full_shutdown(arg);
 		return (1);
 	}
-	clean_memory(arg);
+	//clean_memory(arg);
 	return (0);//exit(0);
 }

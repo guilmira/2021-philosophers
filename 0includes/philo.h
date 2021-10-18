@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 09:48:40 by guilmira          #+#    #+#             */
-/*   Updated: 2021/10/17 12:57:02 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/10/18 12:29:07 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,18 +61,6 @@ typedef struct s_vector
 	int	y;
 }		t_vector;
 
-/** Struct that stores philospher variables. */
-typedef struct s_philo
-{
-	int				index;
-	int				left_index; //para borrar ambos
-	int				right_index;
-	pthread_mutex_t	left;
-	pthread_mutex_t	right;
-	int				time_ate;
-	pthread_t		thread;
-}				t_philo;
-
 /** Struct that stores argument times. */
 typedef struct s_times
 {
@@ -82,9 +70,17 @@ typedef struct s_times
 	int				time_sleep;
 	int				nbr_eat;
 	struct timeval	init_time;
-	t_philo			**array;
-	pthread_mutex_t	*knives;
 }		t_time;
+
+/** Struct that stores philospher variables. */
+typedef struct s_philo
+{
+	int				index;
+	pthread_mutex_t	left;
+	pthread_mutex_t	right;
+	pthread_t		thread;
+	t_time			*times;
+}				t_philo;
 
 /* PARSER AND ARGUMENTS */
 int		parser(int argc, char *argv[]);
@@ -93,15 +89,16 @@ t_time	*reader(int argc, char *argv[]);
 /* PHILOSPHERS MANAGEMENT */
 int		get_microseconds(struct timeval	init_time);
 int		create_philos(t_philo **array, int total_philos);
-int		create_mutex(t_time *arg, int total_philos);
+int	create_mutex(pthread_mutex_t **knives, int total_philos);
 int		assign_mutex(t_time *arg, int total_philos, pthread_mutex_t	*knives);
 /* PHILOSPHERS ROUTINE */
-int		create_threads(t_time *arg);
+int	create_threads(t_philo **array, int total_philos);
 /* MEMORY MANAGEMENT */
 void	full_shutdown(t_time *arg);
-void	clean_memory(t_time *arg);
+void	clean_argument(t_time *arg);
 void	free_array_philos(t_philo **array, int total_philos);
 void	mutex_destructor(pthread_mutex_t	*knives, int total_philos);
+void	clean_array_and_knives(t_philo **array, pthread_mutex_t *knives, int total_philos);
 /* TOOLKIT */
 int		ft_isspaces(int c);
 size_t	ft_strlen(const char *s);

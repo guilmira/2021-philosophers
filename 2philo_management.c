@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 11:30:29 by guilmira          #+#    #+#             */
-/*   Updated: 2021/10/17 12:57:11 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/10/18 12:16:15 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ int	get_microseconds(struct timeval	init_time)
 	return (microseconds_final);
 }
 
-
-
 /** PURPOSE : Create philosophers.
  * 1. Recieves allocated memory.
  * this is: |pointer| |pointer| |pointer| (for 3 philos)
@@ -49,8 +47,7 @@ int	create_philos(t_philo **array, int total_philos)
 			free_array_philos(array, total_philos);
 			return (1);
 		}
-		array[i]->index = i + 1;
-		usleep(80);
+		array[i]->index = i;
 	}
 	return (0);
 }
@@ -58,23 +55,23 @@ int	create_philos(t_philo **array, int total_philos)
 /** PURPOSE : Create array of mutex.
  * The purpose of the mutex is:
  * Lock and unlock resource access. */
-int	create_mutex(t_time *arg, int total_philos)
+int	create_mutex(pthread_mutex_t **knives, int total_philos)
 {
 	int				i;
-	pthread_mutex_t	mutex;
+	pthread_mutex_t	*mutex_array;
 
-	arg->knives = ft_calloc(total_philos, sizeof(pthread_mutex_t));
-	if (!arg->knives)
+	mutex_array = *knives;
+	mutex_array = ft_calloc(total_philos, sizeof(pthread_mutex_t));
+	if (!mutex_array)
 		return (1);
 	i = -1;
 	while (++i < total_philos)
 	{
-		if (pthread_mutex_init(&mutex, NULL))
+		if (pthread_mutex_init(&mutex_array[i], NULL)) //podris poner &arg->knives[i]
 		{
-			mutex_destructor(arg->knives, total_philos);
+			mutex_destructor(mutex_array, total_philos); //ojo con pasar mutex_array, igual hay que apsar a refe.
 			return (1);
 		}
-		arg->knives[i] = mutex;
 	}
 	return (0);
 }
@@ -85,7 +82,7 @@ int	create_mutex(t_time *arg, int total_philos)
  * this is: |pointer| |pointer| |pointer| (for 3 philos)
  * 2. For each of the pointers, an allocation for the struct is needed.
  * For example, for pointer number 1, it needs a malloc(sizeof(STRUCT)). */
-int	assign_mutex(t_time *arg, int total_philos, pthread_mutex_t	*knives)
+/* int	assign_mutex(t_time *arg, int total_philos, pthread_mutex_t	*knives)
 {
 	int		i;
 	t_philo	*philo;
@@ -109,5 +106,5 @@ int	assign_mutex(t_time *arg, int total_philos, pthread_mutex_t	*knives)
 		}
 	}
 	return (0);
-}
+} */
 
