@@ -6,13 +6,13 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:00:14 by guilmira          #+#    #+#             */
-/*   Updated: 2021/10/19 12:39:24 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/10/19 13:23:07 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void ft_leaks(void)
+void	ft_leaks(void)
 {
 	system("leaks philo");
 }
@@ -73,7 +73,8 @@ void	mutex_destructor(pthread_mutex_t **knives, int total_philos)
  * Due to the use of ft_calloc while alocating memory and the
  * careful intitialization of pointers to NULL, the function will not
  * concure in double frees. */
-void	clean_simulation(t_philo **array, pthread_mutex_t **knives, int total_philos)
+void	clean_simulation(t_philo **array, \
+pthread_mutex_t **knives, int total_philos)
 {
 	if (array[0]->print)
 	{

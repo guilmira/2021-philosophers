@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 11:30:29 by guilmira          #+#    #+#             */
-/*   Updated: 2021/10/19 12:25:59 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/10/19 13:21:37 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int	create_philos(t_philo **array, int total_philos)
 	return (0);
 }
 
-
 /** PURPOSE : Create array of pointers to mutex.
  * The purpose of the mutex is:
  * Lock and unlock resource access. */
@@ -71,46 +70,16 @@ pthread_mutex_t	**create_mutex(int total_philos)
 		if (!mutex_array[i])
 		{
 			free_array_mutex(mutex_array, total_philos);
+			free(mutex_array);
 			return (NULL);
 		}
 		if (pthread_mutex_init(mutex_array[i], NULL))
 		{
-			//mutex_destructor(mutex_array, total_philos);
+			mutex_destructor(mutex_array, total_philos);
+			free_array_mutex(mutex_array, total_philos);
+			free(mutex_array);
 			return (NULL);
 		}
 	}
 	return (mutex_array);
 }
-
-
-/** PURPOSE : Create philosophers.
- * 1. Recieves allocated memory.
- * this is: |pointer| |pointer| |pointer| (for 3 philos)
- * 2. For each of the pointers, an allocation for the struct is needed.
- * For example, for pointer number 1, it needs a malloc(sizeof(STRUCT)). */
-/* int	assign_mutex(t_time *arg, int total_philos, pthread_mutex_t	*knives)
-{
-	int		i;
-	t_philo	*philo;
-
-	i = -1;
-	while (++i < total_philos)
-	{
-		philo = arg->array[i];
-		philo->left = knives[philo->index - 1];
-		philo->left_index = philo->index - 1;
-		if (i == total_philos - 1)
-		{
-			philo->right = knives[0];
-			philo->right_index = 0;
-		}
-		else
-		{
-
-			philo->right = knives[philo->index];
-			philo->right_index = philo->index;
-		}
-	}
-	return (0);
-} */
-

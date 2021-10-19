@@ -6,13 +6,13 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 14:58:55 by guilmira          #+#    #+#             */
-/*   Updated: 2021/10/19 12:25:48 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/10/19 13:23:55 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static void	action(t_philo *philo, char *str,\
+static void	action(t_philo *philo, char *str, \
 struct timeval time, int index)
 {
 	int	miliseconds;
@@ -28,20 +28,23 @@ struct timeval time, int index)
 void	knife_l(t_philo *philo)
 {
 	struct timeval	time;
-	time = philo->times->init_time;
 
+	time = philo->times->init_time;
 	action(philo, KNIFE, time, philo->index);
 }
 
 void	knife_r(t_philo *philo)
 {
 	struct timeval	time;
+
 	time = philo->times->init_time;
 	action(philo, KNIFER, time, philo->index);
 }
+
 void	eat(t_philo *philo)
 {
 	struct timeval	time;
+
 	time = philo->times->init_time;
 	action(philo, EAT, time, philo->index);
 	usleep(philo->times->time_eat);

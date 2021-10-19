@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 10:01:42 by guilmira          #+#    #+#             */
-/*   Updated: 2021/10/15 17:22:02 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/10/19 13:24:11 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,6 @@ int	ft_isspaces(int c)
 t_bool	ft_isdigit(int c)
 {
 	return (c >= '0' && c <= '9');
-}
-
-/** PURPOSE : outputs lenght of the string.
- * 1. Advances string while increasing counter. */
-size_t	ft_strlen(const char *s)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
 }
 
 /** PURPOSE : converts string into integer equivalent.

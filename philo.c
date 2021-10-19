@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 09:48:25 by guilmira          #+#    #+#             */
-/*   Updated: 2021/10/19 12:43:16 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/10/19 13:25:03 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,11 @@ int	run_simulation(t_time *arg)
 	if (create_philos(array, arg->total_philos))
 		return (1);
 	knives = create_mutex(arg->total_philos);
-	if (!knives)
+	if (!knives || init_philos(array, arg))
 	{
 		clean_simulation(array, knives, arg->total_philos);
-		return(1);
+		return (1);
 	}
-	init_philos(array, arg);
 	link_philos_and_mutex(array, knives, arg->total_philos);
 	if (create_threads(array, arg->total_philos))
 	{
@@ -53,7 +52,7 @@ int	main(int argc, char *argv[])
 {
 	t_time	*arg;
 
-	atexit(ft_leaks);
+	//atexit(ft_leaks);
 	arg = NULL;
 	if (parser(argc, argv))
 	{
