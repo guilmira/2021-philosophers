@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 09:48:40 by guilmira          #+#    #+#             */
-/*   Updated: 2021/10/19 11:41:06 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/10/19 12:26:27 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@
 # define THINK	WHITE"(%i) Philo %i is thinking\n"NONE
 # define DIED	RED"(%i) Philo %i died\n"NONE, MS, PH
 
+# define LEFT	0
+# define RIGHT	1
 typedef int	t_bool;
 
 /** Struct that stores single direction linked list. */
@@ -76,9 +78,8 @@ typedef struct s_times
 typedef struct s_philo
 {
 	int				index;
-	pthread_mutex_t	left;
-	pthread_mutex_t	right;
-	pthread_mutex_t	*knives;
+	pthread_mutex_t	*left;
+	pthread_mutex_t	*right;
 	pthread_mutex_t	*print;
 	pthread_t		thread;
 	t_time			*times;
@@ -91,26 +92,28 @@ t_time	*reader(int argc, char *argv[]);
 /* PHILOSPHERS MANAGEMENT */
 int		get_microseconds(struct timeval	init_time);
 int		create_philos(t_philo **array, int total_philos);
-pthread_mutex_t	*create_mutex(int total_philos);
+pthread_mutex_t	**create_mutex(int total_philos);
 int		assign_mutex(t_time *arg, int total_philos, pthread_mutex_t	*knives);
 /* PHILOSPHERS ROUTINE */
 int	create_threads(t_philo **array, int total_philos);
 /* PHILOSPHERS LINKER */
 void	link_philos_and_mutex(t_philo **array, \
-pthread_mutex_t *knives, int total_philos);
+pthread_mutex_t **knives, int total_philos);
 int	init_philos(t_philo **array, t_time *arg);
 
 /* MEMORY MANAGEMENT */
 void	ft_shutdown(t_time *arg);
 void	clean_argument(t_time *arg);
 void	free_array_philos(t_philo **array, int total_philos);
-void	mutex_destructor(pthread_mutex_t	*knives, int total_philos);
-void	clean_simulation(t_philo **array, pthread_mutex_t *knives, int total_philos);
+void	free_array_mutex(pthread_mutex_t **array, int total_philos);
+void	mutex_destructor(pthread_mutex_t **knives, int total_philos);
+void	clean_simulation(t_philo **array, pthread_mutex_t **knives, int total_philos);
 /* ACTIONS */
 void	knife_l(t_philo *philo);
 void	knife_r(t_philo *philo);
 void	eat(t_philo *philo);
 void	ft_sleep(t_philo *philo);
+void	think(t_philo *philo);
 
 /* TOOLKIT */
 int		ft_isspaces(int c);

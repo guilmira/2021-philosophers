@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 14:58:55 by guilmira          #+#    #+#             */
-/*   Updated: 2021/10/19 11:52:03 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/10/19 12:25:48 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ struct timeval time, int index)
 	pthread_mutex_lock((philo->print));
 	miliseconds = get_microseconds(time);
 	printf(str, miliseconds, philo_index_print);
-	//printf("(%i) filo %i deja contador como: %i\n", miliseconds,index,g_count);
-
 	pthread_mutex_unlock((philo->print));
 }
 
@@ -48,10 +46,21 @@ void	eat(t_philo *philo)
 	action(philo, EAT, time, philo->index);
 	usleep(philo->times->time_eat);
 }
+
 void	ft_sleep(t_philo *philo)
 {
 	struct timeval	time;
+
 	time = philo->times->init_time;
 	action(philo, SLEEP, time, philo->index);
 	usleep(philo->times->time_sleep);
+}
+
+/** PURPOSE : Waiting natural state. */
+void	think(t_philo *philo)
+{
+	struct timeval	time;
+
+	time = philo->times->init_time;
+	action(philo, THINK, time, philo->index);
 }

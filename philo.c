@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 09:48:25 by guilmira          #+#    #+#             */
-/*   Updated: 2021/10/19 11:51:36 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/10/19 12:43:16 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 int	run_simulation(t_time *arg)
 {
 	t_philo			**array;
-	pthread_mutex_t	*knives;
+	pthread_mutex_t	**knives;
 
 	if (gettimeofday(&(arg->init_time), NULL))
 		return (1);
@@ -41,7 +41,6 @@ int	run_simulation(t_time *arg)
 		clean_simulation(array, knives, arg->total_philos);
 		return (1);
 	}
-	pthread_mutex_destroy((array[0]->print));
 	clean_simulation(array, knives, arg->total_philos);
 	return (0);
 }
@@ -54,7 +53,7 @@ int	main(int argc, char *argv[])
 {
 	t_time	*arg;
 
-	//atexit(ft_leaks);
+	atexit(ft_leaks);
 	arg = NULL;
 	if (parser(argc, argv))
 	{
@@ -70,7 +69,7 @@ int	main(int argc, char *argv[])
 	if (run_simulation(arg))
 	{
 		ft_shutdown(arg); //lleva exit ahora mismo.
-		//no ahce falta un cleane xk se libera en run simultion
+		//no uses clean aqui. se libera en run_simul.
 		return (1);
 	}
 	clean_argument(arg);

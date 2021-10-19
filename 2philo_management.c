@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 11:30:29 by guilmira          #+#    #+#             */
-/*   Updated: 2021/10/19 10:24:03 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/10/19 12:25:59 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,23 +52,30 @@ int	create_philos(t_philo **array, int total_philos)
 	return (0);
 }
 
-/** PURPOSE : Create array of mutex.
+
+/** PURPOSE : Create array of pointers to mutex.
  * The purpose of the mutex is:
  * Lock and unlock resource access. */
-pthread_mutex_t	*create_mutex(int total_philos)
+pthread_mutex_t	**create_mutex(int total_philos)
 {
 	int				i;
-	pthread_mutex_t	*mutex_array;
+	pthread_mutex_t	**mutex_array;
 
-	mutex_array = ft_calloc(total_philos, sizeof(pthread_mutex_t));
+	mutex_array = ft_calloc(total_philos, sizeof(pthread_mutex_t *));
 	if (!mutex_array)
 		return (NULL);
 	i = -1;
 	while (++i < total_philos)
 	{
-		if (pthread_mutex_init(&(mutex_array[i]), NULL))
+		mutex_array[i] = ft_calloc(1, sizeof(pthread_mutex_t));
+		if (!mutex_array[i])
 		{
-			mutex_destructor(mutex_array, total_philos);
+			free_array_mutex(mutex_array, total_philos);
+			return (NULL);
+		}
+		if (pthread_mutex_init(mutex_array[i], NULL))
+		{
+			//mutex_destructor(mutex_array, total_philos);
 			return (NULL);
 		}
 	}
