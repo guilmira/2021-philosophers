@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 09:48:40 by guilmira          #+#    #+#             */
-/*   Updated: 2021/10/18 15:39:25 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/10/19 11:41:06 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ typedef struct s_philo
 	pthread_mutex_t	left;
 	pthread_mutex_t	right;
 	pthread_mutex_t	*knives;
-	pthread_mutex_t	print;
+	pthread_mutex_t	*print;
 	pthread_t		thread;
 	t_time			*times;
 }				t_philo;

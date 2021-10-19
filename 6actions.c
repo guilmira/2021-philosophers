@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 14:58:55 by guilmira          #+#    #+#             */
-/*   Updated: 2021/10/18 15:02:24 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/10/19 11:52:03 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,19 @@ struct timeval time, int index)
 	int	philo_index_print;
 
 	philo_index_print = index + 1;
-	pthread_mutex_lock(&(philo->print));
+	pthread_mutex_lock((philo->print));
 	miliseconds = get_microseconds(time);
 	printf(str, miliseconds, philo_index_print);
 	//printf("(%i) filo %i deja contador como: %i\n", miliseconds,index,g_count);
 
-	pthread_mutex_unlock(&(philo->print));
+	pthread_mutex_unlock((philo->print));
 }
 
 void	knife_l(t_philo *philo)
 {
 	struct timeval	time;
 	time = philo->times->init_time;
+
 	action(philo, KNIFE, time, philo->index);
 }
 

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 13:29:55 by guilmira          #+#    #+#             */
-/*   Updated: 2021/10/18 15:41:16 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/10/19 11:50:51 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 int	init_philos(t_philo **array, t_time *arg)
 {
 	int	i;
-	pthread_mutex_t	mutex_print;
+	pthread_mutex_t	*mutex_print;
 
-	pthread_mutex_init(&mutex_print, NULL);
+	mutex_print = ft_calloc(1, sizeof(pthread_mutex_t));
+
+	pthread_mutex_init(mutex_print, NULL);
 	i = -1;
 	while (++i < arg->total_philos)
 	{

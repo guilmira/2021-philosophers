@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 11:30:29 by guilmira          #+#    #+#             */
-/*   Updated: 2021/10/18 15:40:09 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/10/19 10:24:03 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ pthread_mutex_t	*create_mutex(int total_philos)
 	i = -1;
 	while (++i < total_philos)
 	{
-		if (pthread_mutex_init(&mutex_array[i], NULL))
+		if (pthread_mutex_init(&(mutex_array[i]), NULL))
 		{
 			mutex_destructor(mutex_array, total_philos);
 			return (NULL);

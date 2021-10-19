@@ -6,7 +6,7 @@
 #    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/13 09:55:51 by guilmira          #+#    #+#              #
-#    Updated: 2021/10/18 15:41:24 by guilmira         ###   ########.fr        #
+#    Updated: 2021/10/19 11:51:05 by guilmira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ ARGUMENTS	= 3 3000 300 300
 #--------------------------------------------------------------------------------------------------------------COMPILER
 NAME		= philo
 CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS		= -Wall -Wextra -Werror #-g -fsanitize=address
 #--------------------------------------------------------------------------------------------------------------LIBS
 INCLUDES	= -I ./0includes
 INCLUDES_TH	= -pthread
