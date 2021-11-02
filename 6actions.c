@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 14:58:55 by guilmira          #+#    #+#             */
-/*   Updated: 2021/10/19 13:23:55 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/11/02 12:21:26 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,13 @@ void	think(t_philo *philo)
 
 	time = philo->times->init_time;
 	action(philo, THINK, time, philo->index);
+}
+
+void	release_knife_msg(t_philo *philo)
+{
+	struct timeval	time;
+
+	time = philo->times->init_time;
+	action(philo, "(%i) knife released by philo %i\n", time, philo->index);
+	usleep(2);
 }

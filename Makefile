@@ -6,11 +6,11 @@
 #    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/13 09:55:51 by guilmira          #+#    #+#              #
-#    Updated: 2021/10/19 13:29:13 by guilmira         ###   ########.fr        #
+#    Updated: 2021/11/02 11:01:12 by guilmira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-ARGUMENTS	= 3 3000 300 300
+ARGUMENTS	= 5 3000 300 300
 #número_de_filósofos	tiempo_para_morir
 #tiempo_para_comer	tiempo _para_dormir
 #[número_de_veces_que_cada_filósofo_debe_comer]

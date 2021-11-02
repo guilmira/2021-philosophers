@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 09:48:40 by guilmira          #+#    #+#             */
-/*   Updated: 2021/10/19 13:28:41 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/11/02 12:20:54 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,5 +117,8 @@ t_bool			ft_isdigit(int c);
 int				ft_atoi(const char *str);
 
 void			ft_leaks(void);
+
+
+void	release_knife_msg(t_philo *philo);
 
 #endif

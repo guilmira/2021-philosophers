@@ -6,16 +6,19 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 09:48:25 by guilmira          #+#    #+#             */
-/*   Updated: 2021/10/19 13:25:03 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/11/02 11:06:51 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-/** PURPOSE : Create philosophers.
- * 1. Allocate memory. Notice that there is an array of philos.
+/** PURPOSE : Execute simulation.
+ * 1. Get reference time.
+ * 2. Allocate memory. Notice that there is an array of philos.
  * This requires, first allocate space for (number of philos) pre.
- * this is: |pointer| |pointer| |pointer| (for 3 philos). */
+ * this is: |pointer| |pointer| |pointer| (for 3 philos).
+ * 3. Create philos and mutex and link them.
+ * 4. Create threads and clean process. */
 int	run_simulation(t_time *arg)
 {
 	t_philo			**array;
