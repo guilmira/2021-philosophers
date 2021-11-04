@@ -6,14 +6,14 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 11:30:29 by guilmira          #+#    #+#             */
-/*   Updated: 2021/10/19 13:21:37 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/11/04 13:28:04 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-/** PURPOSE : Calculate number of microseconds that have
- * transcurred since progrma init. */
+/** PURPOSE : Calculate number of MILIseconds that have
+ * transcurred since program init. */
 int	get_microseconds(struct timeval	init_time)
 {
 	long int		seconds;
@@ -26,7 +26,7 @@ int	get_microseconds(struct timeval	init_time)
 	seconds = current_time.tv_sec - init_time.tv_sec;
 	microseconds = current_time.tv_usec - init_time.tv_usec;
 	microseconds_final = (int) seconds * CONVER + microseconds;
-	return (microseconds_final);
+	return (microseconds_final / 1000);
 }
 
 /** PURPOSE : Create philosophers.
@@ -48,6 +48,7 @@ int	create_philos(t_philo **array, int total_philos)
 			return (1);
 		}
 		array[i]->index = i;
+		array[i]->time_ate = 0;
 	}
 	return (0);
 }
@@ -82,4 +83,15 @@ pthread_mutex_t	**create_mutex(int total_philos)
 		}
 	}
 	return (mutex_array);
+}
+
+void	acc_sleep(int time, struct timeval init)
+{
+	int init_miliseconds;
+
+	init_miliseconds = get_microseconds(init);
+	while (get_microseconds(init) < init_miliseconds + time)
+	{
+		usleep(1);
+	}
 }

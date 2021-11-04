@@ -6,11 +6,19 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 09:48:25 by guilmira          #+#    #+#             */
-/*   Updated: 2021/11/02 11:06:51 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/11/04 10:56:42 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+//la primera vex que lo tiras en un nuevo ordena se queda
+//en un bucle como infinito. Tdos agarran el left y no tira
+
+//si hay uno que esta thinking qu active una flag
+//puede ser como un array de prioridades con los que estan think
+//los demas, checkean ese array. Si hay alguienn en cola, se tragan un
+//usleep.
 
 /** PURPOSE : Execute simulation.
  * 1. Get reference time.
@@ -75,5 +83,6 @@ int	main(int argc, char *argv[])
 		return (1);
 	}
 	clean_argument(arg);
-	return (0);//exit(0);
+	//return (0);
+	exit(0);
 }

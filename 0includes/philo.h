@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 09:48:40 by guilmira          #+#    #+#             */
-/*   Updated: 2021/11/02 12:20:54 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/11/04 13:26:23 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct s_times
 	int				time_eat;
 	int				time_sleep;
 	int				nbr_eat;
+	int				in_execution;
 	struct timeval	init_time;
 }		t_time;
 
@@ -73,6 +74,7 @@ typedef struct s_times
 typedef struct s_philo
 {
 	int				index;
+	int				time_ate;
 	pthread_mutex_t	*left;
 	pthread_mutex_t	*right;
 	pthread_mutex_t	*print;
@@ -120,5 +122,6 @@ void			ft_leaks(void);
 
 
 void	release_knife_msg(t_philo *philo);
-
+void	full_dead(t_philo *philo);
+void	acc_sleep(int time, struct timeval init);
 #endif

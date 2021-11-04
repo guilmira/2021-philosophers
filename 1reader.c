@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 15:59:26 by guilmira          #+#    #+#             */
-/*   Updated: 2021/10/18 12:15:36 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/11/04 10:11:57 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@ t_time	*reader(int argc, char *argv[])
 		arg->nbr_eat = ft_atoi(argv[5]);
 	arg->init_time.tv_sec = 0;
 	arg->init_time.tv_usec = 0;
+	arg->in_execution = 1;
 	return (arg);
 }

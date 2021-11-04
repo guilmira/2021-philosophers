@@ -6,11 +6,16 @@
 #    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/13 09:55:51 by guilmira          #+#    #+#              #
-#    Updated: 2021/11/02 11:01:12 by guilmira         ###   ########.fr        #
+#    Updated: 2021/11/04 13:33:24 by guilmira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-ARGUMENTS	= 5 3000 300 300
+ARGUMENTS	= 5 180 60 60
+#5 180 60 60
+#4 120 60 60 pares deberian vivir. ME FUNCIONA
+#5 190 60 60
+#5 130 60 60
+#200 130 60 60 //creo que no deberiia morir ninguno
 #número_de_filósofos	tiempo_para_morir
 #tiempo_para_comer	tiempo _para_dormir
 #[número_de_veces_que_cada_filósofo_debe_comer]
@@ -47,6 +52,7 @@ exepure: $(noflags)
 
 norm:
 	norminette $(SRCS)
+#añadir normi de header
 
 clean:
 	@rm -rf $(OBJS)
