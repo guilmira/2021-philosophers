@@ -6,14 +6,18 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 09:48:25 by guilmira          #+#    #+#             */
-/*   Updated: 2021/11/04 10:56:42 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/11/06 13:22:20 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+//cuando hay mas filos, se complica.
+
 //la primera vex que lo tiras en un nuevo ordena se queda
 //en un bucle como infinito. Tdos agarran el left y no tira
+
+//eliminar colores.
 
 //si hay uno que esta thinking qu active una flag
 //puede ser como un array de prioridades con los que estan think

@@ -6,11 +6,22 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 11:30:29 by guilmira          #+#    #+#             */
-/*   Updated: 2021/11/04 13:28:04 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/11/06 13:04:57 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+/** PURPOSE : Accurate sleep. Garantees to work by reducing
+ * time lapse of microseconds. */
+void	acc_sleep(int time, struct timeval init)
+{
+	int	init_miliseconds;
+
+	init_miliseconds = get_microseconds(init);
+	while (get_microseconds(init) < init_miliseconds + time)
+		usleep(1);
+}
 
 /** PURPOSE : Calculate number of MILIseconds that have
  * transcurred since program init. */
@@ -83,15 +94,4 @@ pthread_mutex_t	**create_mutex(int total_philos)
 		}
 	}
 	return (mutex_array);
-}
-
-void	acc_sleep(int time, struct timeval init)
-{
-	int init_miliseconds;
-
-	init_miliseconds = get_microseconds(init);
-	while (get_microseconds(init) < init_miliseconds + time)
-	{
-		usleep(1);
-	}
 }

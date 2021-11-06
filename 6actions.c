@@ -6,12 +6,17 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 14:58:55 by guilmira          #+#    #+#             */
-/*   Updated: 2021/11/04 13:29:10 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/11/06 13:15:22 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+/** PURPOSE : Main body if printing actions.
+ * 1. If program is not in execution, return.
+ * 2. Lock mutex.
+ * 3. Get actual time.
+ * 4. Print message and unlock mutex. */
 static void	action(t_philo *philo, char *str, \
 struct timeval time, int index)
 {
@@ -27,6 +32,7 @@ struct timeval time, int index)
 	pthread_mutex_unlock((philo->print));
 }
 
+/** PURPOSE : Lock mutex, print message and wait time. */
 void	knife_l(t_philo *philo)
 {
 	struct timeval	time;
@@ -35,6 +41,7 @@ void	knife_l(t_philo *philo)
 	action(philo, KNIFE, time, philo->index);
 }
 
+/** PURPOSE : Lock mutex, print message and wait time. */
 void	knife_r(t_philo *philo)
 {
 	struct timeval	time;
@@ -43,6 +50,7 @@ void	knife_r(t_philo *philo)
 	action(philo, KNIFER, time, philo->index);
 }
 
+/** PURPOSE : Lock mutex, print message and wait time. */
 void	eat(t_philo *philo)
 {
 	struct timeval	time;
@@ -53,6 +61,7 @@ void	eat(t_philo *philo)
 	acc_sleep(philo->times->time_eat, time);
 }
 
+/** PURPOSE : Lock mutex, print message and wait time. */
 void	ft_sleep(t_philo *philo)
 {
 	struct timeval	time;
@@ -71,6 +80,7 @@ void	think(t_philo *philo)
 	action(philo, THINK, time, philo->index);
 }
 
+/** PURPOSE : Lock mutex, print message and wait time. */
 void	release_knife_msg(t_philo *philo)
 {
 	struct timeval	time;
@@ -78,19 +88,4 @@ void	release_knife_msg(t_philo *philo)
 	time = philo->times->init_time;
 	action(philo, "(%i) knife released by philo %i\n", time, philo->index);
 	usleep(2);
-}
-
-void	full_dead(t_philo *philo)
-{
-	struct timeval	time;
-	int	miliseconds;
-	int	philo_index_print;
-
-	time = philo->times->init_time;
-
-	philo_index_print = philo->index + 1;
-	pthread_mutex_lock((philo->print));
-	miliseconds = get_microseconds(time);
-	printf(DIED, miliseconds, philo_index_print);
-	pthread_mutex_unlock((philo->print));
 }

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 10:40:01 by guilmira          #+#    #+#             */
-/*   Updated: 2021/10/19 12:58:24 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/11/06 12:19:57 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ static t_bool	below_one(int nbr)
  * 2. Number must be passed clean. Check auxiliar functions.
  * 3. Number cannot contain double sign.
  * 4. Number cannot exceed int range.
- * 5 Times cannot be less than one. */
+ * 5. Times cannot be less than one. */
 t_bool	parser(int argc, char *argv[])
 {
 	int	i;
@@ -119,7 +119,7 @@ t_bool	parser(int argc, char *argv[])
 		if (below_one(ft_atoi(argv[i])))
 			return (1);
 	}
-	if (ft_atoi(argv[1]) < 3)
+	if (ft_atoi(argv[1]) < MINPHI)
 		return (1);
 	return (0);
 }

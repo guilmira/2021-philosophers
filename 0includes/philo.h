@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 09:48:40 by guilmira          #+#    #+#             */
-/*   Updated: 2021/11/04 13:26:23 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/11/06 13:09:45 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,14 @@
 # define CONVER	1000000
 # define LEFT	0
 # define RIGHT	1
+# define MINPHI	1
 /* ERROR MESSAGES */
 # define EX		"Error.\n"
 /* COLOURS */
-# define RED	"\033[0;31m"//dead
-# define YELLOW	"\033[0;33m"//eat
-# define BLUE	"\033[0;34m"//sleep
-# define WHITE	"\033[0;37m"//thinking
+# define RED	"\033[0;31m"
+# define YELLOW	"\033[0;33m"
+# define BLUE	"\033[0;34m"
+# define WHITE	"\033[0;37m"
 # define NONE	"\033[0m"
 /* MESSAGES */
 # define KNIFE	"(%i) Philo %i has taken left fork   🗡\n"
@@ -92,6 +93,7 @@ int				create_philos(t_philo **array, int total_philos);
 pthread_mutex_t	**create_mutex(int total_philos);
 int				assign_mutex(t_time *arg, \
 int total_philos, pthread_mutex_t	*knives);
+void			acc_sleep(int time, struct timeval init);
 /* PHILOSPHERS ROUTINE */
 int				create_threads(t_philo **array, int total_philos);
 /* PHILOSPHERS LINKER */
@@ -112,16 +114,17 @@ void			knife_r(t_philo *philo);
 void			eat(t_philo *philo);
 void			ft_sleep(t_philo *philo);
 void			think(t_philo *philo);
+/* ACTIONS SECOND*/
+void			dead_message(t_philo *philo);
+/* DEATH_CONTROL */
+int				dead_checker(t_philo **array, int total_philos);
+void			single_dead_message(t_philo *philo);
 /* TOOLKIT */
 int				ft_isspaces(int c);
 void			*ft_calloc(size_t count, size_t size);
 t_bool			ft_isdigit(int c);
 int				ft_atoi(const char *str);
-
+/* LEAKS CHECKER */
 void			ft_leaks(void);
-
-
-void	release_knife_msg(t_philo *philo);
-void	full_dead(t_philo *philo);
-void	acc_sleep(int time, struct timeval init);
+void			release_knife_msg(t_philo *philo);
 #endif
