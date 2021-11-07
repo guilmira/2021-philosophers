@@ -6,11 +6,13 @@
 #    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/13 09:55:51 by guilmira          #+#    #+#              #
-#    Updated: 2021/11/06 13:52:26 by guilmira         ###   ########.fr        #
+#    Updated: 2021/11/07 13:38:24 by guilmira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-ARGUMENTS	= 4 310 200 100
+ARGUMENTS	= 4 401 200 200
+#4 301 200 100 no debe funcionar, bien. 4 401 200 100 si
+#haz pruebaas simetricas 400 200 200
 #60 150 60 60 se cuela en el menaje de muerte
 #200 130 60 60 NO TIRA
 #20 410 200 200

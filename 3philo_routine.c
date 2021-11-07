@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 10:55:52 by guilmira          #+#    #+#             */
-/*   Updated: 2021/11/06 14:08:37 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/11/07 13:21:54 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	*routine(void *array_element)
 	philo = (t_philo *)array_element;
 	if (philo->index % 2)
 		usleep(200); //1000 he visto
-	gettimeofday(&(arg->init_time), NULL); //cada uno tiene su tiempo inical
+	//gettimeofday(&(philo->times->init_time), NULL); //cada uno tiene su tiempo inical
 	i = -1;
 	while (philo->times->in_execution)
 	{

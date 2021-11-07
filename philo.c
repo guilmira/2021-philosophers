@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 09:48:25 by guilmira          #+#    #+#             */
-/*   Updated: 2021/11/06 14:07:19 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/11/07 13:21:32 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ int	run_simulation(t_time *arg)
 	t_philo			**array;
 	pthread_mutex_t	**knives;
 
-	/* if (gettimeofday(&(arg->init_time), NULL))
-		return (1); */
+	if (gettimeofday(&(arg->init_time), NULL))
+		return (1);
 	array = ft_calloc(arg->total_philos, sizeof(t_philo *));
 	if (!array)
 		return (1);
