@@ -6,17 +6,18 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 10:40:01 by guilmira          #+#    #+#             */
-/*   Updated: 2021/11/06 12:19:57 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/11/07 13:17:56 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+//ultima linea no esta chekeada.
+
 /** PURPOSE : Auxiliar for main parser. Detects the following:
  * 1. Error if string does not contain a number, spaces, or a character.
  * 2. Error if in the whole string there is not a single digit.
  * 3. Error if int is > or < than int limit. */
-//ultima linea no esta chekeada
 static t_bool	check_argument(char *str)
 {
 	int	i;
