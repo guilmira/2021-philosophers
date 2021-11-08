@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 11:30:29 by guilmira          #+#    #+#             */
-/*   Updated: 2021/11/06 13:04:57 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/11/08 12:19:52 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	create_philos(t_philo **array, int total_philos)
 		}
 		array[i]->index = i;
 		array[i]->time_ate = 0;
+		array[i]->complete = 0;
 	}
 	return (0);
 }

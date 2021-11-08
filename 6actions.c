@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 14:58:55 by guilmira          #+#    #+#             */
-/*   Updated: 2021/11/06 13:15:22 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/11/08 13:24:53 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ struct timeval time, int index)
 		return ;
 	philo_index_print = index + 1;
 	pthread_mutex_lock((philo->print));
+	if (!philo->times->in_execution)
+	{
+		pthread_mutex_unlock((philo->print));
+		return ;
+	}
 	miliseconds = get_microseconds(time);
 	printf(str, miliseconds, philo_index_print);
 	pthread_mutex_unlock((philo->print));

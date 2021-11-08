@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 10:55:52 by guilmira          #+#    #+#             */
-/*   Updated: 2021/11/07 13:21:54 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/11/08 14:44:43 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,18 @@ static void	*routine(void *array_element)
 		usleep(200); //1000 he visto
 	//gettimeofday(&(philo->times->init_time), NULL); //cada uno tiene su tiempo inical
 	i = -1;
-	while (philo->times->in_execution)
+	while (philo->times->in_execution && \
+	philo->complete != philo->times->nbr_eat)
 	{
 		grab_knife(philo, LEFT); //si eres apr, agrra primero derecha
 		grab_knife(philo, RIGHT);
 		eat(philo);
-		release_knife_msg(philo); //provisional para k te ayude a entender
+		//release_knife_msg(philo);
 		release_knife(philo, LEFT);
 		release_knife(philo, RIGHT);
 		ft_sleep(philo);
 		think(philo);
+		philo->complete++;
 	}
 	return (NULL);
 }
@@ -83,7 +85,10 @@ int	create_threads(t_philo **array, int total_philos)
 		if (pthread_create(&(array[i]->thread), NULL, routine, array[i]))
 			return (1);
 	}
-	dead_checker(array, total_philos);
+	if (array[0]->times->nbr_eat == -1)
+		dead_checker(array, total_philos);
+	else
+		augmented_dead_checker(array, total_philos);
 	i = -1;
 	while (++i < total_philos)
 		pthread_join(array[i]->thread, NULL);

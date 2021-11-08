@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 11:28:23 by guilmira          #+#    #+#             */
-/*   Updated: 2021/11/06 13:22:25 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/11/08 14:21:37 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ void	dead_message(t_philo *philo)
 
 	time = philo->times->init_time;
 	philo_index_print = philo->index + 1;
-	pthread_mutex_lock((philo->print));
+	pthread_mutex_lock((philo->dead));
 	miliseconds = get_microseconds(time);
 	printf(DIED, miliseconds, philo_index_print);
-	pthread_mutex_unlock((philo->print));
+	pthread_mutex_unlock((philo->dead));
 }
 
 /** PURPOSE : Print behaviour for a single philo. */

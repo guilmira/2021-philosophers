@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 09:48:40 by guilmira          #+#    #+#             */
-/*   Updated: 2021/11/06 13:09:45 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/11/08 14:17:36 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,11 @@ typedef struct s_philo
 {
 	int				index;
 	int				time_ate;
+	int				complete;
 	pthread_mutex_t	*left;
 	pthread_mutex_t	*right;
 	pthread_mutex_t	*print;
+	pthread_mutex_t	*dead;
 	pthread_t		thread;
 	t_time			*times;
 }				t_philo;
@@ -119,6 +121,7 @@ void			dead_message(t_philo *philo);
 /* DEATH_CONTROL */
 int				dead_checker(t_philo **array, int total_philos);
 void			single_dead_message(t_philo *philo);
+int				augmented_dead_checker(t_philo **array, int total_philos);
 /* TOOLKIT */
 int				ft_isspaces(int c);
 void			*ft_calloc(size_t count, size_t size);
