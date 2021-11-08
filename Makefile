@@ -6,11 +6,11 @@
 #    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/13 09:55:51 by guilmira          #+#    #+#              #
-#    Updated: 2021/11/08 16:16:23 by guilmira         ###   ########.fr        #
+#    Updated: 2021/11/08 16:52:30 by guilmira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-ARGUMENTS	= 25 600 100 100 50
+ARGUMENTS	= 20 200 100 100 50
 #no mas de 200 philos y tiemps menores a 60ms
 #en 14 y 16 esta fallando
 #make exe | grep "Philo 12 is eating" | wc -l

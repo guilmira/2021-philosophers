@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 09:48:40 by guilmira          #+#    #+#             */
-/*   Updated: 2021/11/08 16:13:55 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/11/08 16:52:18 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,14 @@
 # define SLEEP	BLUE"(%i) Philo %i is sleeping\n"NONE
 # define THINK	WHITE"(%i) Philo %i is thinking\n"NONE
 # define DIED	RED"(%i) Philo %i died\n"NONE
+
+/* # define KNIFE	"%i %i has taken a fork\n"
+# define KNIFEL	"(%i) Philo %i has taken left fork   🗡\n"
+# define KNIFER	"(%i) Philo %i has taken right fork   🗡\n"
+# define EAT	YELLOW"%i %i is eating\n"NONE
+# define SLEEP	BLUE"%i %i is sleeping\n"NONE
+# define THINK	WHITE"%i %i is thinking\n"NONE
+# define DIED	RED"%i %i died\n"NONE */
 
 typedef int	t_bool;
 
