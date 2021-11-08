@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 14:58:55 by guilmira          #+#    #+#             */
-/*   Updated: 2021/11/08 13:24:53 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/11/08 15:53:08 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	knife_l(t_philo *philo)
 
 	time = philo->times->init_time;
 	action(philo, KNIFE, time, philo->index);
+	//action(philo, KNIFEL, time, philo->index);
 }
 
 /** PURPOSE : Lock mutex, print message and wait time. */
@@ -52,7 +53,8 @@ void	knife_r(t_philo *philo)
 	struct timeval	time;
 
 	time = philo->times->init_time;
-	action(philo, KNIFER, time, philo->index);
+	action(philo, KNIFE, time, philo->index);
+	//action(philo, KNIFER, time, philo->index);
 }
 
 /** PURPOSE : Lock mutex, print message and wait time. */
@@ -83,14 +85,4 @@ void	think(t_philo *philo)
 
 	time = philo->times->init_time;
 	action(philo, THINK, time, philo->index);
-}
-
-/** PURPOSE : Lock mutex, print message and wait time. */
-void	release_knife_msg(t_philo *philo)
-{
-	struct timeval	time;
-
-	time = philo->times->init_time;
-	action(philo, "(%i) knife released by philo %i\n", time, philo->index);
-	usleep(2);
 }

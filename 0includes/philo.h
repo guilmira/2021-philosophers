@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 09:48:40 by guilmira          #+#    #+#             */
-/*   Updated: 2021/11/08 14:17:36 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/11/08 16:13:55 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@
 # define WHITE	"\033[0;37m"
 # define NONE	"\033[0m"
 /* MESSAGES */
-# define KNIFE	"(%i) Philo %i has taken left fork   🗡\n"
+# define KNIFE	"(%i) Philo %i has taken a fork\n"
+# define KNIFEL	"(%i) Philo %i has taken left fork   🗡\n"
 # define KNIFER	"(%i) Philo %i has taken right fork   🗡\n"
 # define EAT	YELLOW"(%i) Philo %i is eating\n"NONE
 # define SLEEP	BLUE"(%i) Philo %i is sleeping\n"NONE
@@ -129,5 +130,4 @@ t_bool			ft_isdigit(int c);
 int				ft_atoi(const char *str);
 /* LEAKS CHECKER */
 void			ft_leaks(void);
-void			release_knife_msg(t_philo *philo);
 #endif

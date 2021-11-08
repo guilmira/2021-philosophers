@@ -6,11 +6,14 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 10:55:52 by guilmira          #+#    #+#             */
-/*   Updated: 2021/11/08 14:44:43 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/11/08 16:26:59 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+
+//vaariable tiktok que recalcule el delay que te puede dar u sleep
 
 void	release_knife(t_philo *philo, int flag)
 {
@@ -34,30 +37,57 @@ void	grab_knife(t_philo *philo, int flag)
 	}
 }
 
-/** PURPOSE : Execute thread (philosopher) routine. */
-static void	*routine(void *array_element)
+static void	left_routine(t_philo *philo)
 {
-	int				i;
-	t_philo			*philo;
+	int	i;
 
-	philo = (t_philo *)array_element;
-	if (philo->index % 2)
-		usleep(200); //1000 he visto
-	//gettimeofday(&(philo->times->init_time), NULL); //cada uno tiene su tiempo inical
 	i = -1;
 	while (philo->times->in_execution && \
 	philo->complete != philo->times->nbr_eat)
 	{
-		grab_knife(philo, LEFT); //si eres apr, agrra primero derecha
+		grab_knife(philo, LEFT);
 		grab_knife(philo, RIGHT);
 		eat(philo);
-		//release_knife_msg(philo);
 		release_knife(philo, LEFT);
 		release_knife(philo, RIGHT);
 		ft_sleep(philo);
 		think(philo);
 		philo->complete++;
 	}
+}
+
+static void	right_routine(t_philo *philo)
+{
+	int	i;
+
+	i = -1;
+	while (philo->times->in_execution && \
+	philo->complete != philo->times->nbr_eat)
+	{
+		left_routine(philo);
+		grab_knife(philo, RIGHT);
+		grab_knife(philo, LEFT);
+		eat(philo);
+		release_knife(philo, RIGHT);
+		release_knife(philo, LEFT);
+		ft_sleep(philo);
+		think(philo);
+		philo->complete++;
+	}
+}
+
+/** PURPOSE : Execute thread (philosopher) routine. */
+static void	*routine(void *array_element)
+{
+	t_philo			*philo;
+
+	philo = (t_philo *)array_element;
+	if (philo->index % 2)
+		usleep(200);
+	if (philo->index % 2)
+		left_routine(philo);
+	else
+		right_routine(philo);
 	return (NULL);
 }
 
