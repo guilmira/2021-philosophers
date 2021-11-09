@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 11:30:29 by guilmira          #+#    #+#             */
-/*   Updated: 2021/11/08 12:19:52 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/11/09 10:59:44 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	acc_sleep(int time, struct timeval init)
 
 	init_miliseconds = get_microseconds(init);
 	while (get_microseconds(init) < init_miliseconds + time)
-		usleep(1);
+		usleep(100);
 }
 
 /** PURPOSE : Calculate number of MILIseconds that have
