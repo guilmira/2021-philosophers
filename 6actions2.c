@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 11:28:23 by guilmira          #+#    #+#             */
-/*   Updated: 2021/11/09 11:32:53 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/11/09 12:48:44 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	dead_message(t_philo *philo)
 	time = philo->times->init_time;
 	philo_index_print = philo->index + 1;
 	pthread_mutex_lock((philo->dead));
-	miliseconds = get_microseconds(time);
+	miliseconds = get_miliseconds(time);
 	printf(DIED, miliseconds, philo_index_print);
 	pthread_mutex_unlock((philo->dead));
 }

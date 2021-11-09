@@ -6,14 +6,14 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 10:55:52 by guilmira          #+#    #+#             */
-/*   Updated: 2021/11/09 11:32:50 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/11/09 13:36:15 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 /** PURPOSE : Loop for philos that grab first the left fork. */
-static void	left_routine(t_philo *philo)
+static void	ft_loop(t_philo *philo)
 {
 	int	i;
 
@@ -26,27 +26,6 @@ static void	left_routine(t_philo *philo)
 		eat(philo);
 		release_knife(philo, LEFT);
 		release_knife(philo, RIGHT);
-		ft_sleep(philo);
-		think(philo);
-		philo->complete++;
-	}
-}
-
-/** PURPOSE : Loop for philos that grab first the right fork. */
-static void	right_routine(t_philo *philo)
-{
-	int	i;
-
-	i = -1;
-	while (philo->times->in_execution && \
-	philo->complete != philo->times->nbr_eat)
-	{
-		left_routine(philo);
-		grab_knife(philo, RIGHT);
-		grab_knife(philo, LEFT);
-		eat(philo);
-		release_knife(philo, RIGHT);
-		release_knife(philo, LEFT);
 		ft_sleep(philo);
 		think(philo);
 		philo->complete++;
@@ -61,10 +40,9 @@ static void	*routine(void *array_element)
 	philo = (t_philo *)array_element;
 	if (philo->index % 2)
 		usleep(200);
-	if (philo->index % 2)
-		left_routine(philo);
-	else
-		right_routine(philo);
+	if (philo->index == 1)
+		usleep(500);
+	ft_loop(philo);
 	return (NULL);
 }
 
@@ -75,7 +53,7 @@ static void	single_philo(t_philo **array)
 	single_dead_message(array[0]);
 }
 
-/** PURPOSE : Create thread for ecach of the phiilosphers.
+/** PURPOSE : Create thread for each of the phiilosphers.
  * 1. Creates with a function that recieves as input the routine .
  * 2. Executes thread join to close the thread within main process. */
 int	create_threads(t_philo **array, int total_philos)

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 09:48:40 by guilmira          #+#    #+#             */
-/*   Updated: 2021/11/09 11:33:28 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/11/09 13:39:27 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int				parser(int argc, char *argv[]);
 /* ARGUMENT READ */
 t_time			*reader(int argc, char *argv[]);
 /* PHILOSPHERS MANAGEMENT */
-int				get_microseconds(struct timeval	init_time);
+int				get_miliseconds(struct timeval	init_time);
 int				create_philos(t_philo **array, int total_philos);
 pthread_mutex_t	**create_mutex(int total_philos);
 int				assign_mutex(t_time *arg, \

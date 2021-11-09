@@ -6,26 +6,27 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 11:30:29 by guilmira          #+#    #+#             */
-/*   Updated: 2021/11/09 10:59:44 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/11/09 13:14:07 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 /** PURPOSE : Accurate sleep. Garantees to work by reducing
- * time lapse of microseconds. */
+ * time lapse of microseconds. Notice that there are values for the
+ * usleep that are much more precise, like 60 and 200. */
 void	acc_sleep(int time, struct timeval init)
 {
 	int	init_miliseconds;
 
-	init_miliseconds = get_microseconds(init);
-	while (get_microseconds(init) < init_miliseconds + time)
+	init_miliseconds = get_miliseconds(init);
+	while (get_miliseconds(init) < init_miliseconds + time)
 		usleep(100);
 }
 
-/** PURPOSE : Calculate number of MILIseconds that have
+/** PURPOSE : Calculate number of miliseconds that have
  * transcurred since program init. */
-int	get_microseconds(struct timeval	init_time)
+int	get_miliseconds(struct timeval	init_time)
 {
 	long int		seconds;
 	int				microseconds;

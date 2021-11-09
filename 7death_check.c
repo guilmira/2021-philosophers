@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 10:07:29 by guilmira          #+#    #+#             */
-/*   Updated: 2021/11/09 11:58:07 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/11/09 12:50:54 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	fersea(t_philo *philo)
 	time_die = philo->times->time_die;
 	if (philo->complete == philo->times->nbr_eat)
 		return (0);
-	actual_time = get_microseconds(philo->times->init_time);
+	actual_time = get_miliseconds(philo->times->init_time);
 	if ((actual_time - philo->time_ate) > time_die)
 		return (1);
 	return (0);
