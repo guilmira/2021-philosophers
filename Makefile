@@ -6,11 +6,11 @@
 #    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/13 09:55:51 by guilmira          #+#    #+#              #
-#    Updated: 2021/11/09 13:39:39 by guilmira         ###   ########.fr        #
+#    Updated: 2021/11/09 13:42:16 by guilmira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-ARGUMENTS	= 4 460 200 200 10
+ARGUMENTS	= 4 440 200 200 10
 #make exe | grep "1 is eating" | wc -l
 #número_de_filósofos	tiempo_para_morir
 #tiempo_para_comer	tiempo _para_dormir
@@ -18,7 +18,7 @@ ARGUMENTS	= 4 460 200 200 10
 #--------------------------------------------------------------------------------------------------------------COMPILER
 NAME		=	philo
 CC			=	gcc
-CFLAGS		=	-Wall -Wextra -Werror -g -O3 -fsanitize=address
+CFLAGS		=	-Wall -Wextra -Werror #-g -O3 -fsanitize=address
 #--------------------------------------------------------------------------------------------------------------LIBS
 INCLUDES	=	-I ./0includes
 INCLUDES_TH	=	-pthread
