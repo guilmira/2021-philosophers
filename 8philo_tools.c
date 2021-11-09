@@ -6,13 +6,13 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 10:01:42 by guilmira          #+#    #+#             */
-/*   Updated: 2021/10/19 13:24:11 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/11/09 11:58:28 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-/** PURPOSE : returns 1 if space of variation. */
+/** PURPOSE : returns 1 if space or variation. */
 int	ft_isspaces(int c)
 {
 	return (c == ' ' || c == '\t' || c == '\n' || \

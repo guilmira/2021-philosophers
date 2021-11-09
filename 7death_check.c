@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 10:07:29 by guilmira          #+#    #+#             */
-/*   Updated: 2021/11/08 12:54:31 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/11/09 11:58:07 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ int	dead_checker(t_philo **array, int total_philos)
 	}
 }
 
+/** PURPOSE : Checks if all philoss have eaten the required
+ * number of times (if specified). */
 int	full_hunger_check(t_philo **array, int total_philos)
 {
 	int	i;
@@ -59,6 +61,7 @@ int	full_hunger_check(t_philo **array, int total_philos)
 	return (1);
 }
 
+/** PURPOSE : Imprved fucntion for second case program. */
 int	augmented_dead_checker(t_philo **array, int total_philos)
 {
 	int	i;
@@ -81,39 +84,5 @@ int	augmented_dead_checker(t_philo **array, int total_philos)
 			}
 			i++;
 		}
-	}
-}
-
-/** PURPOSE : Cleaning function in order to free memory of array.
- * Due to the use of ft_calloc while alocating memory for the
- * array, it is garanteed that each sigle element is intialized to NULL. */
-void	free_array_mutex(pthread_mutex_t **array, int total_philos)
-{
-	int	i;
-
-	if (!array)
-		return ;
-	i = -1;
-	while (++i < total_philos)
-	{
-		if (array[i])
-			free(array[i]);
-	}
-}
-
-/** PURPOSE : Cleaning function in order to free memory of array.
- * Due to the use of ft_calloc while alocating memory for the
- * array, it is garanteed that each sigle element is intialized to NULL. */
-void	free_array_philos(t_philo **array, int total_philos)
-{
-	int	i;
-
-	if (!array)
-		return ;
-	i = -1;
-	while (++i < total_philos)
-	{
-		if (array[i])
-			free(array[i]);
 	}
 }

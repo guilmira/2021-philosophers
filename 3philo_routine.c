@@ -6,37 +6,13 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 10:55:52 by guilmira          #+#    #+#             */
-/*   Updated: 2021/11/08 16:26:59 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/11/09 11:32:50 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-
-//vaariable tiktok que recalcule el delay que te puede dar u sleep
-
-void	release_knife(t_philo *philo, int flag)
-{
-	if (!flag)
-		pthread_mutex_unlock((philo->left));
-	else
-		pthread_mutex_unlock((philo->right));
-}
-
-void	grab_knife(t_philo *philo, int flag)
-{
-	if (!flag)
-	{
-		pthread_mutex_lock((philo->left));
-		knife_l(philo);
-	}
-	else
-	{
-		pthread_mutex_lock((philo->right));
-		knife_r(philo);
-	}
-}
-
+/** PURPOSE : Loop for philos that grab first the left fork. */
 static void	left_routine(t_philo *philo)
 {
 	int	i;
@@ -56,6 +32,7 @@ static void	left_routine(t_philo *philo)
 	}
 }
 
+/** PURPOSE : Loop for philos that grab first the right fork. */
 static void	right_routine(t_philo *philo)
 {
 	int	i;
@@ -91,9 +68,10 @@ static void	*routine(void *array_element)
 	return (NULL);
 }
 
-void	single_philo(t_philo **array)
+/** PURPOSE : Simple solution for when a single philo is present. */
+static void	single_philo(t_philo **array)
 {
-	knife_l(array[0]);
+	knife(array[0]);
 	single_dead_message(array[0]);
 }
 

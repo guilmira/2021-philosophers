@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 09:48:40 by guilmira          #+#    #+#             */
-/*   Updated: 2021/11/08 16:52:18 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/11/09 11:33:28 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,28 +29,12 @@
 # define MINPHI	1
 /* ERROR MESSAGES */
 # define EX		"Error.\n"
-/* COLOURS */
-# define RED	"\033[0;31m"
-# define YELLOW	"\033[0;33m"
-# define BLUE	"\033[0;34m"
-# define WHITE	"\033[0;37m"
-# define NONE	"\033[0m"
 /* MESSAGES */
-# define KNIFE	"(%i) Philo %i has taken a fork\n"
-# define KNIFEL	"(%i) Philo %i has taken left fork   🗡\n"
-# define KNIFER	"(%i) Philo %i has taken right fork   🗡\n"
-# define EAT	YELLOW"(%i) Philo %i is eating\n"NONE
-# define SLEEP	BLUE"(%i) Philo %i is sleeping\n"NONE
-# define THINK	WHITE"(%i) Philo %i is thinking\n"NONE
-# define DIED	RED"(%i) Philo %i died\n"NONE
-
-/* # define KNIFE	"%i %i has taken a fork\n"
-# define KNIFEL	"(%i) Philo %i has taken left fork   🗡\n"
-# define KNIFER	"(%i) Philo %i has taken right fork   🗡\n"
-# define EAT	YELLOW"%i %i is eating\n"NONE
-# define SLEEP	BLUE"%i %i is sleeping\n"NONE
-# define THINK	WHITE"%i %i is thinking\n"NONE
-# define DIED	RED"%i %i died\n"NONE */
+# define KNIFE	"(%i) Philo %i has taken a fork 🗡\n"
+# define EAT	"(%i) Philo %i is eating\n"
+# define SLEEP	"(%i) Philo %i is sleeping\n"
+# define THINK	"(%i) Philo %i is thinking\n"
+# define DIED	"(%i) Philo %i died\n"
 
 typedef int	t_bool;
 
@@ -120,12 +104,13 @@ void			mutex_destructor(pthread_mutex_t **knives, int total_philos);
 void			clean_simulation(t_philo **array, \
 pthread_mutex_t **knives, int total_philos);
 /* ACTIONS */
-void			knife_l(t_philo *philo);
-void			knife_r(t_philo *philo);
+void			knife(t_philo *philo);
 void			eat(t_philo *philo);
 void			ft_sleep(t_philo *philo);
 void			think(t_philo *philo);
 /* ACTIONS SECOND*/
+void			release_knife(t_philo *philo, int flag);
+void			grab_knife(t_philo *philo, int flag);
 void			dead_message(t_philo *philo);
 /* DEATH_CONTROL */
 int				dead_checker(t_philo **array, int total_philos);
@@ -136,6 +121,4 @@ int				ft_isspaces(int c);
 void			*ft_calloc(size_t count, size_t size);
 t_bool			ft_isdigit(int c);
 int				ft_atoi(const char *str);
-/* LEAKS CHECKER */
-void			ft_leaks(void);
 #endif

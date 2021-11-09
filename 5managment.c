@@ -6,32 +6,11 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:00:14 by guilmira          #+#    #+#             */
-/*   Updated: 2021/11/06 12:58:18 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/11/09 11:20:08 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-void	ft_leaks(void)
-{
-	system("leaks philo");
-}
-//EXIT no permitida, habra que quitarla.
-
-/** PURPOSE : Cleaning function in order to destroy mutex. */
-void	mutex_destructor(pthread_mutex_t **knives, int total_philos)
-{
-	int	i;
-
-	if (!knives)
-		return ;
-	i = -1;
-	while (++i < total_philos)
-	{
-		//printf("illegal instruction\n"); revisar en algun momento
-		pthread_mutex_destroy(knives[i]);
-	}
-}
 
 /** PURPOSE : Free memory of simulation.
  * For the function to properly work, all pointers have been
@@ -45,6 +24,8 @@ pthread_mutex_t **knives, int total_philos)
 	if (array[0]->print)
 	{
 		pthread_mutex_destroy(array[0]->print);
+		pthread_mutex_destroy(array[0]->dead);
+		free(array[0]->dead);
 		free(array[0]->print);
 	}
 	if (knives)
@@ -64,6 +45,18 @@ pthread_mutex_t **knives, int total_philos)
 	}
 }
 
+/** PURPOSE : Cleaning function in order to destroy mutex. */
+void	mutex_destructor(pthread_mutex_t **knives, int total_philos)
+{
+	int	i;
+
+	if (!knives)
+		return ;
+	i = -1;
+	while (++i < total_philos)
+		pthread_mutex_destroy(knives[i]);
+}
+
 /** PURPOSE : Clean only the main argument. */
 void	clean_argument(t_time *arg)
 {
@@ -79,5 +72,5 @@ void	ft_shutdown(t_time *arg)
 	if (arg)
 		clean_argument(arg);
 	printf("%s", EX);
-	exit(0);
+	return ;
 }

@@ -6,11 +6,35 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 11:28:23 by guilmira          #+#    #+#             */
-/*   Updated: 2021/11/08 14:21:37 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/11/09 11:32:53 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+/** PURPOSE : To unlock mutex in correct order. */
+void	release_knife(t_philo *philo, int flag)
+{
+	if (!flag)
+		pthread_mutex_unlock((philo->left));
+	else
+		pthread_mutex_unlock((philo->right));
+}
+
+/** PURPOSE : Lock mutex in correct order. */
+void	grab_knife(t_philo *philo, int flag)
+{
+	if (!flag)
+	{
+		pthread_mutex_lock((philo->left));
+		knife(philo);
+	}
+	else
+	{
+		pthread_mutex_lock((philo->right));
+		knife(philo);
+	}
+}
 
 /** PURPOSE : Print dead message for philo. */
 void	dead_message(t_philo *philo)

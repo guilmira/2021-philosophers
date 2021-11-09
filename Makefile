@@ -6,11 +6,11 @@
 #    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/13 09:55:51 by guilmira          #+#    #+#              #
-#    Updated: 2021/11/09 11:06:21 by guilmira         ###   ########.fr        #
+#    Updated: 2021/11/09 11:53:57 by guilmira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-ARGUMENTS	= 28 420 200 200 23
+ARGUMENTS	= 4 700 200 200 23
 #número_de_filósofos	tiempo_para_morir
 #tiempo_para_comer	tiempo _para_dormir
 #[número_de_veces_que_cada_filósofo_debe_comer]
@@ -39,15 +39,8 @@ $(NAME): $(OBJS)
 exe: $(NAME)
 	./$(NAME) $(ARGUMENTS)
 
-noflags: $(OBJS)
-	$(CC) $(OBJS) $(INCLUDES) $(INCLUDES_TH) -o $(NAME)
-	@echo $(GREEN) "$(NAME) compiled" $(NONE)
-exepure: $(noflags)
-	./$(NAME) $(ARGUMENTS)
-
 norm:
 	norminette $(SRCS)
-#añadir normi de header
 
 clean:
 	@rm -rf $(OBJS)

@@ -6,13 +6,11 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 10:40:01 by guilmira          #+#    #+#             */
-/*   Updated: 2021/11/07 13:17:56 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/11/09 11:55:49 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-//ultima linea no esta chekeada.
 
 /** PURPOSE : Auxiliar for main parser. Detects the following:
  * 1. Error if string does not contain a number, spaces, or a character.

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 14:58:55 by guilmira          #+#    #+#             */
-/*   Updated: 2021/11/08 16:51:55 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/11/09 11:28:13 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,23 +38,12 @@ struct timeval time, int index)
 }
 
 /** PURPOSE : Lock mutex, print message and wait time. */
-void	knife_l(t_philo *philo)
+void	knife(t_philo *philo)
 {
 	struct timeval	time;
 
 	time = philo->times->init_time;
 	action(philo, KNIFE, time, philo->index);
-	//action(philo, KNIFEL, time, philo->index);
-}
-
-/** PURPOSE : Lock mutex, print message and wait time. */
-void	knife_r(t_philo *philo)
-{
-	struct timeval	time;
-
-	time = philo->times->init_time;
-	action(philo, KNIFE, time, philo->index);
-	//action(philo, KNIFER, time, philo->index);
 }
 
 /** PURPOSE : Lock mutex, print message and wait time. */
@@ -65,7 +54,6 @@ void	eat(t_philo *philo)
 	time = philo->times->init_time;
 	action(philo, EAT, time, philo->index);
 	philo->time_ate = get_microseconds(time);
-	//usleep(100);
 	acc_sleep(philo->times->time_eat, time);
 }
 
@@ -76,7 +64,6 @@ void	ft_sleep(t_philo *philo)
 
 	time = philo->times->init_time;
 	action(philo, SLEEP, time, philo->index);
-	//usleep(100);
 	acc_sleep(philo->times->time_sleep, time);
 }
 

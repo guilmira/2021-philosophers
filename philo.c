@@ -6,23 +6,11 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 09:48:25 by guilmira          #+#    #+#             */
-/*   Updated: 2021/11/07 13:21:32 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/11/09 11:37:07 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-//cuando hay mas filos, se complica.
-
-//la primera vex que lo tiras en un nuevo ordena se queda
-//en un bucle como infinito. Tdos agarran el left y no tira
-
-//eliminar colores.
-
-//si hay uno que esta thinking qu active una flag
-//puede ser como un array de prioridades con los que estan think
-//los demas, checkean ese array. Si hay alguienn en cola, se tragan un
-//usleep.
 
 /** PURPOSE : Execute simulation.
  * 1. Get reference time.
@@ -67,7 +55,6 @@ int	main(int argc, char *argv[])
 {
 	t_time	*arg;
 
-	//atexit(ft_leaks);
 	arg = NULL;
 	if (parser(argc, argv))
 	{
@@ -82,11 +69,9 @@ int	main(int argc, char *argv[])
 	}
 	if (run_simulation(arg))
 	{
-		ft_shutdown(arg); //lleva exit ahora mismo.
-		//no uses clean aqui. se libera en run_simul.
+		ft_shutdown(arg);
 		return (1);
 	}
 	clean_argument(arg);
-	//return (0);
-	exit(0);
+	return (0);
 }
