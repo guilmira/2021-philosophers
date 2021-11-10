@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 09:48:40 by guilmira          #+#    #+#             */
-/*   Updated: 2021/11/09 13:39:27 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/11/10 11:36:05 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,18 @@
 # define MINPHI	1
 /* ERROR MESSAGES */
 # define EX		"Error.\n"
+/* COLOURS */
+# define RED	"\033[0;31m"
+# define YELLOW	"\033[0;33m"
+# define BLUE	"\033[0;34m"
+# define WHITE	"\033[0;37m"
+# define NONE	"\033[0m"
 /* MESSAGES */
-# define KNIFE	"(%i) Philo %i has taken a fork 🗡\n"
-# define EAT	"(%i) Philo %i is eating\n"
-# define SLEEP	"(%i) Philo %i is sleeping\n"
-# define THINK	"(%i) Philo %i is thinking\n"
-# define DIED	"(%i) Philo %i died\n"
+# define KNIFE	"(%i) Philo %i has taken a fork   🗡\n"
+# define EAT	YELLOW"(%i) Philo %i is eating\n"NONE
+# define SLEEP	BLUE"(%i) Philo %i is sleeping\n"NONE
+# define THINK	WHITE"(%i) Philo %i is thinking\n"NONE
+# define DIED	RED"(%i) Philo %i died\n"NONE
 
 typedef int	t_bool;
 
