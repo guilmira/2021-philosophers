@@ -6,12 +6,11 @@
 #    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/13 09:55:51 by guilmira          #+#    #+#              #
-#    Updated: 2021/11/09 13:42:16 by guilmira         ###   ########.fr        #
+#    Updated: 2021/11/10 12:24:42 by guilmira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ARGUMENTS	= 4 440 200 200 10
-#make exe | grep "1 is eating" | wc -l
 #número_de_filósofos	tiempo_para_morir
 #tiempo_para_comer	tiempo _para_dormir
 #[número_de_veces_que_cada_filósofo_debe_comer]
