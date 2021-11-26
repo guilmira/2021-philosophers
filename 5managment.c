@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:00:14 by guilmira          #+#    #+#             */
-/*   Updated: 2021/11/09 11:20:08 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/11/26 13:04:54 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /** PURPOSE : Free memory of simulation.
  * For the function to properly work, all pointers have been
  * initialized to NULL at the beginning of the program.
- * Due to the use of ft_calloc while alocating memory and the
+ * Due to the use of ft_calloc while allocating memory and the
  * careful intitialization of pointers to NULL, the function will not
  * concure in double frees. */
 void	clean_simulation(t_philo **array, \
