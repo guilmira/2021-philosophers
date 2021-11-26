@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 09:48:40 by guilmira          #+#    #+#             */
-/*   Updated: 2021/11/10 11:36:05 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/11/26 12:22:16 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,6 @@
 # define DIED	RED"(%i) Philo %i died\n"NONE
 
 typedef int	t_bool;
-
-/** Struct that stores single direction linked list. */
-typedef struct s_list
-{
-	void			*content;
-	struct s_list	*next;
-}					t_list;
 
 /** Struct of a vector, 2D representation. */
 typedef struct s_vector
